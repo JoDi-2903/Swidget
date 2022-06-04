@@ -16,6 +16,7 @@
 		ABC4AD25284B663000B5942A /* MovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4AD24284B663000B5942A /* MovieStore.swift */; };
 		ABC4AD27284B677100B5942A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4AD26284B677100B5942A /* Utils.swift */; };
 		ABC4AD2D284B799C00B5942A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4AD2C284B799C00B5942A /* ImageLoader.swift */; };
+		ABC4AD2F284B816E00B5942A /* MovieListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4AD2E284B816E00B5942A /* MovieListState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		ABC4AD24284B663000B5942A /* MovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStore.swift; sourceTree = "<group>"; };
 		ABC4AD26284B677100B5942A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		ABC4AD2C284B799C00B5942A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		ABC4AD2E284B816E00B5942A /* MovieListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC4AD2C284B799C00B5942A /* ImageLoader.swift */,
+				ABC4AD2E284B816E00B5942A /* MovieListState.swift */,
 			);
 			path = Bindings;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				ABC4AD27284B677100B5942A /* Utils.swift in Sources */,
 				AB28DEC3281374C4001F3471 /* ContentView.swift in Sources */,
 				AB28DEC1281374C4001F3471 /* SwidgetApp.swift in Sources */,
+				ABC4AD2F284B816E00B5942A /* MovieListState.swift in Sources */,
 				ABC4AD23284B643B00B5942A /* MovieService.swift in Sources */,
 				ABC4AD20284B631800B5942A /* Movie.swift in Sources */,
 				ABC4AD25284B663000B5942A /* MovieStore.swift in Sources */,
