@@ -39,10 +39,19 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct RandomMovieWidgetEntryView: View {
+    @Environment(\.widgetFamily) var widgetFamily
     var entry: Provider.Entry
+    let movieId = 675353
 
     var body: some View {
-        Text(entry.date, style: .time)
+        switch widgetFamily {
+        case .systemSmall:
+            SmallSizeView(entry: entry)
+        case .systemMedium:
+            MediumSizeView(entry: entry, movieId: movieId)
+        default:
+            Text("Not implemented!")
+        }
     }
 }
 

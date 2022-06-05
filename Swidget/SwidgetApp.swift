@@ -11,7 +11,25 @@ import SwiftUI
 struct SwidgetApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                StartPageView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "tv")
+                            Text("Start")
+                        }
+                    }
+                    .tag(0)
+                
+                MoviesOverviewView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "tv")
+                            Text("Movies")
+                        }
+                    }
+                    .tag(1)
+            }
         }
     }
 }
