@@ -38,7 +38,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
 }
 
-struct RandomMovieWidgetEntryView : View {
+struct RandomMovieWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -54,14 +54,20 @@ struct RandomMovieWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             RandomMovieWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Random Movie")
+        .description("Discover new movies throughout your day.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
 struct RandomMovieWidget_Previews: PreviewProvider {
     static var previews: some View {
-        RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Group {
+            RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date()))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            
+            RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date()))
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+        }
     }
 }
