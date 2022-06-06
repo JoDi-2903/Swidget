@@ -37,19 +37,26 @@ struct TextOverlayView: View {
     let title: String
     let year: String
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(year)
-                .font(.title3)
-                .fontWeight(.medium)
-                .foregroundColor(.white)
-                .lineLimit(1)
-            Text(title)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .lineLimit(1)
-                .allowsTightening(true)
-                .shadow(color: .black, radius: 1, x: 1.0, y: 1.0)
+        HStack (alignment: .bottom) {
+            VStack(alignment: .leading) {
+                Spacer(minLength: 0)
+                Text(year)
+                    .font(.body)
+                    .fontWeight(.medium)
+                    .italic()
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                Text(title)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .allowsTightening(true)
+                    .shadow(color: .black, radius: 3, x: 2.0, y: 2.0)
+            }
+            .padding(.all)
+            Spacer(minLength: 0)
         }
+        .padding(.all)
     }
 }

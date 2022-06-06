@@ -43,12 +43,13 @@ struct RandomMovieWidgetEntryView: View {
     var entry: Provider.Entry
     let movieTitle = "Bloodshot"
     let movieYear = "2020"
+    let coverURL = URL(string: "https://image.tmdb.org/t/p/w500/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg")
     let backdropURL = URL(string: "https://image.tmdb.org/t/p/w500/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg")
 
     var body: some View {
         switch widgetFamily {
         case .systemSmall:
-            SmallSizeView(entry: entry)
+            SmallSizeView(entry: entry, title: movieTitle, coverURL: coverURL)
         case .systemMedium:
             MediumSizeView(entry: entry, title: movieTitle, year: movieYear, backdropURL: backdropURL)
         default:
@@ -79,6 +80,7 @@ struct RandomMovieWidget_Previews: PreviewProvider {
             
             RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date()))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .environment(\.colorScheme, .light)
         }
     }
 }
