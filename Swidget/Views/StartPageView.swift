@@ -10,10 +10,8 @@ import SwiftUI
 struct StartPageView: View {
     var body: some View {
         VStack {
-            HStack {
-                Text("Hello, Swidget!")
-                    .padding()
-            }
+            Text("Hello, Swidget!")
+                .padding()
         }
     }
 }

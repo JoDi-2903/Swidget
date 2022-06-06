@@ -41,14 +41,16 @@ struct SimpleEntry: TimelineEntry {
 struct RandomMovieWidgetEntryView: View {
     @Environment(\.widgetFamily) var widgetFamily
     var entry: Provider.Entry
-    let movieId = 675353
+    let movieTitle = "Bloodshot"
+    let movieYear = "2020"
+    let backdropURL = URL(string: "https://image.tmdb.org/t/p/w500/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg")
 
     var body: some View {
         switch widgetFamily {
         case .systemSmall:
             SmallSizeView(entry: entry)
         case .systemMedium:
-            MediumSizeView(entry: entry, movieId: movieId)
+            MediumSizeView(entry: entry, title: movieTitle, year: movieYear, backdropURL: backdropURL)
         default:
             Text("Not implemented!")
         }
