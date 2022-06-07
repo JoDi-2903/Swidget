@@ -10,11 +10,9 @@ import WidgetKit
 
 struct MediumSizeView: View {
     var entry: SimpleEntry
-    let title: String
-    let year: String
-    let backdropURL: URL?
     
     var body: some View {
+        let backdropURL = URL(string: "https://image.tmdb.org/t/p/w500\(entry.movie.backdropPath ?? "/i3IOqOFdAdjw0ebQXkIevybkkNF.jpg")")
         ZStack {
             Group {
                 if let url = backdropURL, let imageData = try? Data(contentsOf: url),
@@ -28,25 +26,24 @@ struct MediumSizeView: View {
                 }
             }
         }
-        .overlay(TextOverlayView(entry: entry, title: title, year: year))
+        .overlay(TextOverlayView(entry: entry))
     }
 }
 
 struct TextOverlayView: View {
     var entry: SimpleEntry
-    let title: String
-    let year: String
+    
     var body: some View {
         HStack (alignment: .bottom) {
             VStack(alignment: .leading) {
                 Spacer(minLength: 0)
-                Text(year)
+                Text(entry.movie.yearText)
                     .font(.body)
                     .fontWeight(.medium)
                     .italic()
                     .foregroundColor(.white)
                     .lineLimit(1)
-                Text(title)
+                Text(entry.movie.title)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

@@ -154,3 +154,11 @@ struct MovieVideo: Decodable, Identifiable {
         return URL(string: "https://youtube.com/watch?v=\(key)")
     }
 }
+
+
+// Extension for PlaceholderView of widgets
+extension Movie {
+    static func placeholder(_ id: Int) -> Movie {
+        Movie(id: id, title: "Uncharted", posterPath: "/tlZpSxYuBRoVJBOpUrPdQe9FmFq.jpg", backdropPath: "/aEGiJJP91HsKVTEPy1HhmN0wRLm.jpg", overview: "A young street-smart, Nathan Drake and his wisecracking partner Victor “Sully” Sullivan embark on a dangerous pursuit of “the greatest treasure never found” while also tracking clues that may lead to Nathan’s long-lost brother.", voteAverage: 7.2, voteCount: 2312, runtime: 116, releaseDate: "2022-02-10", genres: nil, credits: nil, videos: nil)
+    }
+}
