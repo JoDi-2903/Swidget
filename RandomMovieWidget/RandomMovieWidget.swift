@@ -36,6 +36,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    //let movie: Movie
 }
 
 struct RandomMovieWidgetEntryView: View {
@@ -43,15 +44,15 @@ struct RandomMovieWidgetEntryView: View {
     var entry: Provider.Entry
     let movieTitle = "Bloodshot"
     let movieYear = "2020"
-    let coverURL = URL(string: "https://image.tmdb.org/t/p/w500/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg")
-    let backdropURL = URL(string: "https://image.tmdb.org/t/p/w500/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg")
+    let coverURL = "/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg"
+    let backdropURL = "/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg"
 
     var body: some View {
         switch widgetFamily {
         case .systemSmall:
-            SmallSizeView(entry: entry, title: movieTitle, coverURL: coverURL)
+            SmallSizeView(entry: entry, title: movieTitle, coverURL: URL(string: "https://image.tmdb.org/t/p/w500\(coverURL)"))
         case .systemMedium:
-            MediumSizeView(entry: entry, title: movieTitle, year: movieYear, backdropURL: backdropURL)
+            MediumSizeView(entry: entry, title: movieTitle, year: movieYear, backdropURL: URL(string: "https://image.tmdb.org/t/p/w500\(backdropURL)"))
         default:
             Text("Not implemented!")
         }

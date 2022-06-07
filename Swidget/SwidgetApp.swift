@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct SwidgetApp: App {
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
+        }
+    
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -30,6 +34,7 @@ struct SwidgetApp: App {
                     }
                     .tag(1)
             }
+            .accentColor(.orange)
         }
     }
 }
