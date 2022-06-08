@@ -17,27 +17,39 @@ struct Provider: TimelineProvider {
         Task {
 //            let movieDetailState = MovieDetailState()
 //            movieDetailState.loadMovie(id: 675353)
-//            let movie = movieDetailState.movie!
-//            let entry = SimpleEntry(date: .now, movie: movie)
+//            let movie = movieDetailState.movie
             let entry = SimpleEntry(date: .now, movie: .placeholder(42))
             completion(entry)
+            
+            //            let movieDetailState = MovieDetailState()
+            //            movieDetailState.loadMovie(id: 675353)
+            //            let movie = movieDetailState.movie!
         }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
-//            let movieDetailState = MovieDetailState()
-//            movieDetailState.loadMovie(id: 675353)
-//            let movie = movieDetailState.movie!
-//            let entry = SimpleEntry(date: .now, movie: movie)
-            let entry = SimpleEntry(date: .now, movie: .placeholder(42))
-            
-            // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
-            let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
-            completion(timeline)
+            do {
+                let movie = MovieDetailState().loadMovie(id: 675353) // Fehler: loadMovie ist void
+                
+                let entry = SimpleEntry(date: .now, movie: .placeholder(1))
+                
+                //                let movieDetailState = MovieDetailState()
+                //                movieDetailState.loadMovie(id: 675353)
+                //                let entry = SimpleEntry(date: .now, movie: movieDetailState.movie
+                
+                // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
+                let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
+                completion(timeline)
+            } catch {
+                let entry = SimpleEntry(date: .now, movie: .placeholder(0))
+                let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
+                completion(timeline)
+            }
         }
     }
 }
+
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
