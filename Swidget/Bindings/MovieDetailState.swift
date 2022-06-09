@@ -34,3 +34,37 @@ class MovieDetailState: ObservableObject {
         }
     }
 }
+
+//final class WidgetDataService {
+//    //static let shared = WidgetDataService()
+//    private let movieService: MovieService
+//    var movie: Movie?
+//    var isLoading = false
+//    var error: NSError?
+//
+//    init(movieService: MovieService = MovieStore.shared) {
+//        self.movieService = movieService
+//    }
+//    
+//    func loadMovie(id: Int) {
+//        self.movie = nil
+//        self.isLoading = false
+//        self.movieService.fetchMovie(id: id) {[weak self] (result) in
+//            guard let self = self else { return }
+//            
+//            self.isLoading = false
+//            switch result {
+//            case .success(let movie):
+//                self.movie = movie
+//            case .failure(let error):
+//                self.error = error as NSError
+//            }
+//        }
+//    }
+//
+//    func getMovieFromId(id: Int) -> Movie{
+//        loadMovie(id: id)
+//        let resultMovie: Movie = self.movie! //?? .placeholder(42)
+//        return resultMovie
+//    }
+//}

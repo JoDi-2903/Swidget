@@ -10,39 +10,35 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), movie: .placeholder(42))
+        SimpleEntry(date: Date(), movie: .placeholder(1))
     }
     
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         Task {
-//            let movieDetailState = MovieDetailState()
-//            movieDetailState.loadMovie(id: 675353)
-//            let movie = movieDetailState.movie
-            let entry = SimpleEntry(date: .now, movie: .placeholder(42))
-            completion(entry)
-            
-            //            let movieDetailState = MovieDetailState()
-            //            movieDetailState.loadMovie(id: 675353)
-            //            let movie = movieDetailState.movie!
+            do {
+                let movie = try await WidgetDataService.shared.getMovieFromId(id: 675353)
+                let entry = SimpleEntry(date: .now, movie: movie)
+                completion(entry)
+            } catch {
+                let entry = SimpleEntry(date: .now, movie: .placeholder(42))
+                completion(entry)
+            }
         }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
             do {
-                let movie = MovieDetailState().loadMovie(id: 675353) // Fehler: loadMovie ist void
-                
-                let entry = SimpleEntry(date: .now, movie: .placeholder(1))
-                
-                //                let movieDetailState = MovieDetailState()
-                //                movieDetailState.loadMovie(id: 675353)
-                //                let entry = SimpleEntry(date: .now, movie: movieDetailState.movie
+                let movie = try await WidgetDataService.shared.getMovieFromId(id: 675353)
+                let entry = SimpleEntry(date: .now, movie: movie)
                 
                 // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
                 let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
                 completion(timeline)
             } catch {
-                let entry = SimpleEntry(date: .now, movie: .placeholder(0))
+                let entry = SimpleEntry(date: .now, movie: .placeholder(42))
+                
+                // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
                 let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
                 completion(timeline)
             }

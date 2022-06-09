@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB04A49528521C9E00EC7C05 /* WidgetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB04A49428521C9E00EC7C05 /* WidgetDataService.swift */; };
+		AB04A49628521C9E00EC7C05 /* WidgetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB04A49428521C9E00EC7C05 /* WidgetDataService.swift */; };
 		AB28DEC1281374C4001F3471 /* SwidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB28DEC0281374C4001F3471 /* SwidgetApp.swift */; };
 		AB28DEC3281374C4001F3471 /* StartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB28DEC2281374C4001F3471 /* StartPageView.swift */; };
 		AB28DEC5281374C6001F3471 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB28DEC4281374C6001F3471 /* Assets.xcassets */; };
@@ -62,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB04A49428521C9E00EC7C05 /* WidgetDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataService.swift; sourceTree = "<group>"; };
 		AB28DEBD281374C4001F3471 /* Swidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB28DEC0281374C4001F3471 /* SwidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwidgetApp.swift; sourceTree = "<group>"; };
 		AB28DEC2281374C4001F3471 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 			children = (
 				ABC4AD22284B643B00B5942A /* MovieService.swift */,
 				ABC4AD24284B663000B5942A /* MovieStore.swift */,
+				AB04A49428521C9E00EC7C05 /* WidgetDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -329,6 +333,7 @@
 				ABC4AD20284B631800B5942A /* Movie.swift in Sources */,
 				ABC4AD25284B663000B5942A /* MovieStore.swift in Sources */,
 				ABA916B8284D10000089A9E9 /* PosterCardView.swift in Sources */,
+				AB04A49528521C9E00EC7C05 /* WidgetDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +349,7 @@
 				ABA916B5284CEAAB0089A9E9 /* SmallSizeView.swift in Sources */,
 				ABC4AD4B284BB43E00B5942A /* Movie.swift in Sources */,
 				ABC4AD4A284BB43E00B5942A /* MovieListState.swift in Sources */,
+				AB04A49628521C9E00EC7C05 /* WidgetDataService.swift in Sources */,
 				ABC4AD4E284BB43E00B5942A /* MovieService.swift in Sources */,
 				ABC4AD4F284BB50400B5942A /* Utils.swift in Sources */,
 			);
