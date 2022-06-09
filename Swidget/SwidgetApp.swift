@@ -19,7 +19,7 @@ struct SwidgetApp: App {
                 StartPageView()
                     .tabItem {
                         VStack {
-                            Image(systemName: "tv")
+                            Image(systemName: "house.fill")
                             Text("Start")
                         }
                     }
@@ -28,11 +28,20 @@ struct SwidgetApp: App {
                 MoviesOverviewView()
                     .tabItem {
                         VStack {
-                            Image(systemName: "tv")
+                            Image(systemName: "play.tv")
                             Text("Movies")
                         }
                     }
                     .tag(1)
+                
+                StartPageView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "magnifyingglass")
+                            Text("Search")
+                        }
+                    }
+                    .tag(2)
             }
             .accentColor(.orange)
         }
