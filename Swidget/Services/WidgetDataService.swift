@@ -22,6 +22,11 @@ final class WidgetDataService {
         }
         
         let (data, urlResponse) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299 else {
+            throw URLError(.badServerResponse)
+        }
+        
         let result = try jsonDecoder.decode(T.self, from: data)
         return result
     }
