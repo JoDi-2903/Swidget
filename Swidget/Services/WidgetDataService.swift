@@ -15,8 +15,8 @@ final class WidgetDataService {
     private let jsonDecoder = Utils.jsonDecoder
     
     // generic helper function to fetch data from given URL
-    private func fetch<T: Decodable>(from endpoint: String) async throws -> T {
-        let urlString = baseAPIURL + endpoint + "?api_key=" + apiKey + "&language=en-US"
+    private func fetch<T: Decodable>(endpoint: String, parameters: String) async throws -> T {
+        let urlString = baseAPIURL + endpoint + "?api_key=" + apiKey + parameters
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
         }
@@ -32,7 +32,31 @@ final class WidgetDataService {
     }
     
     func getMovieFromId(id: Int) async throws -> Movie {
-        let movie: Movie = try await fetch(from: "/movie/\(id)")
+        let movie: Movie = try await fetch(endpoint: "/movie/\(id)", parameters: "&language=en-US")
         return movie
     }
+    
+    func getRandomMovie() async throws -> Movie {
+        let randomPageNumber = Int.random(in: 1...500)
+        
+        // There are currently 14974 results and 749 pages for the selected parameters
+        let randomMoviesResponse: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(randomPageNumber)&vote_count.gte=100&vote_average.gte=5")
+//        let randomMovies: [Movie] = randomMoviesResponse //randomElement() ?? .placeholder(2)
+//        let randomMovie: Movie = randomMovies.randomElement()
+//        return randomMovie
+        return .placeholder(2)
+    }
+//    func getRandomMovie() async throws -> Movie {
+//        let (latestMovie, _): (Movie, Int) = try await fetch(from: "/movie/latest")
+//        let highestMovieId: Int = latestMovie.id
+//
+//        var (randomMovie, httpResponseCode): (Movie, Int)
+//        var randomId: Int
+//        repeat {
+//                randomId = Int.random(in: 1...highestMovieId)
+//                (randomMovie, httpResponseCode) = try await fetch(from: "/movie/\(randomId)")
+//        } while (httpResponseCode != 200 && randomMovie.backdropPath != nil && randomMovie.posterPath != nil && randomMovie.releaseDate != nil && randomMovie.adult == false);
+//
+//        return randomMovie
+//    }
 }

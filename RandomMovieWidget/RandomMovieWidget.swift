@@ -16,11 +16,11 @@ struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         Task {
             do {
-                let movie = try await WidgetDataService.shared.getMovieFromId(id: 675353)
+                let movie = try await WidgetDataService.shared.getRandomMovie()
                 let entry = SimpleEntry(date: .now, movie: movie)
                 completion(entry)
             } catch {
-                let entry = SimpleEntry(date: .now, movie: .placeholder(42))
+                let entry = SimpleEntry(date: .now, movie: .placeholder(1))
                 completion(entry)
             }
         }
@@ -29,14 +29,14 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
             do {
-                let movie = try await WidgetDataService.shared.getMovieFromId(id: 675353)
+                let movie = try await WidgetDataService.shared.getRandomMovie() //.getMovieFromId(id: 526896)
                 let entry = SimpleEntry(date: .now, movie: movie)
                 
                 // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
                 let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
                 completion(timeline)
             } catch {
-                let entry = SimpleEntry(date: .now, movie: .placeholder(42))
+                let entry = SimpleEntry(date: .now, movie: .placeholder(1))
                 
                 // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
                 let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
@@ -85,12 +85,13 @@ struct RandomMovieWidget: Widget {
 struct RandomMovieWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(42)))
+            RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(1)))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             
-            RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(42)))
+            RandomMovieWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(1)))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
                 .environment(\.colorScheme, .light)
         }
+            
     }
 }
