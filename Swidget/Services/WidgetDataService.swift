@@ -60,7 +60,7 @@ final class WidgetDataService {
 //        return randomMovie
 //    }
     
-    func releasedOnThisDay(yearsAgo: Int) async throws -> Movie {
+    func getReleasedOnThisDay(yearsAgo: Int) async throws -> Movie {
         let response: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2019-06-09&primary_release_date.lte=2019-06-09")
         return .placeholder(2)
     }

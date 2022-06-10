@@ -10,32 +10,50 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+        SimpleEntry(date: Date(), movie: .placeholder(2))
     }
     
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        completion(entry)
+        Task {
+            do {
+                let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: 5)
+                let entry = SimpleEntry(date: .now, movie: movie)
+                completion(entry)
+            } catch {
+                let entry = SimpleEntry(date: .now, movie: .placeholder(2))
+                completion(entry)
+            }
+        }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
         
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
+        Task {
+            var entries: [SimpleEntry] = []
+            let currentDate = Date()
+            
+            do {
+                for hourOffset in 0 ..< 5 {
+                    let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+                    let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: 5)
+                    let entry = SimpleEntry(date: entryDate, movie: movie)
+                    entries.append(entry)
+                }
+            } catch {
+                let entry = SimpleEntry(date: .now, movie: .placeholder(2))
+                entries.append(entry)
+            }
+            
+            let timeline = Timeline(entries: entries, policy: .atEnd)
+            completion(timeline)
         }
-        
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let movie: Movie
 }
 
 struct RewindWidgetEntryView : View {
@@ -44,10 +62,12 @@ struct RewindWidgetEntryView : View {
     
     var body: some View {
         switch widgetFamily {
+        case .systemSmall:
+            SmallSizeView(entry: entry)
         case .systemMedium:
-            Text(entry.date, style: .time)
+            MediumSizeView(entry: entry)
         case .systemLarge:
-            Text(entry.date, style: .time)
+            LargeSizeView(entry: entry)
         default:
             Text("Not implemented!")
         }
@@ -64,17 +84,20 @@ struct RewindWidget: Widget {
         }
         .configurationDisplayName("Rewind Time")
         .description("Throwback to past movies that were released exactly on today's date.")
-        .supportedFamilies([.systemMedium, .systemLarge])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
 struct RewindWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RewindWidgetEntryView(entry: SimpleEntry(date: Date()))
+            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2)))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            
+            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2)))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             
-            RewindWidgetEntryView(entry: SimpleEntry(date: Date()))
+            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2)))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }
