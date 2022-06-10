@@ -32,12 +32,14 @@ struct Provider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         Task {
             var entries: [SimpleEntry] = []
+            let reloadTimes: [Int] = [0, 8, 10, 12, 14, 16, 18, 20, 22]
+            let yearsAgo: [Int] = [2, 3, 5, 7, 10, 12, 15, 20, 30]
             let currentDate = Date()
             
             do {
-                for hourOffset in 0 ..< 5 {
-                    let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                    let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: 5)
+                for scheduleNumber in 0 ... 8 {
+                    let entryDate = Calendar.current.date(bySettingHour: reloadTimes[scheduleNumber], minute: 0, second: 0, of: currentDate)!
+                    let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: yearsAgo[scheduleNumber])
                     let (_, movieCrew, _) = try await WidgetDataService.shared.getCreditsAndTrailerForMovie(movieId: movie.id)
                     let entry = SimpleEntry(date: entryDate, movie: movie, movieCrew: movieCrew)
                     entries.append(entry)

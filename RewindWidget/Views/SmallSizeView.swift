@@ -32,9 +32,9 @@ struct TextOverlaySmallView: View {
     var entry: SimpleEntry
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                ZStack {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top) {
+                Group {
                     Text(entry.movie.yearText)
                         .font(.system(.headline, design: .rounded))
                         .fontWeight(.medium)
@@ -43,16 +43,18 @@ struct TextOverlaySmallView: View {
                         .lineLimit(1)
                         .padding(6)
                         .shadow(color: .orange, radius: 3, x: 2.0, y: 2.0)
-                    
                 }
                 .background(ContainerRelativeShape().fill(Color.black))
                 .opacity(0.8)
                 .cornerRadius(10.0)
-                .padding(6)
+                .padding(.top)
                 
+                Spacer(minLength: 0)
             }
+            .padding(.all)
             Spacer(minLength: 0)
         }
-        Spacer(minLength: 0)
+        .padding(.all)
+        
     }
 }
