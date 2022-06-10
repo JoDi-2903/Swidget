@@ -33,13 +33,17 @@ struct Provider: TimelineProvider {
                 let entry = SimpleEntry(date: .now, movie: movie)
                 
                 // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
-                let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
+                let currentDate = Date()
+                let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!
+                let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
                 completion(timeline)
             } catch {
                 let entry = SimpleEntry(date: .now, movie: .placeholder(1))
                 
                 // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed
-                let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60 * 60 * 30)))
+                let currentDate = Date()
+                let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!
+                let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
                 completion(timeline)
             }
         }

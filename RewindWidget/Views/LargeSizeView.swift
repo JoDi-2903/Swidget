@@ -161,8 +161,8 @@ struct OverviewAndCastView: View {
                 .font(.system(size: 16))
             Text(entry.movie.overview)
                 .font(.system(size: 16))
-                .lineLimit(6)
-                .allowsTightening(true)
+                //.lineLimit(6)
+                //.allowsTightening(true)
             
             Spacer(minLength: 0)
             
