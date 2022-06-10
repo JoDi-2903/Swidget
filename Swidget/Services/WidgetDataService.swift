@@ -59,9 +59,6 @@ final class WidgetDataService {
         let movieResponse: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=\(getSearchDateString)&primary_release_date.lte=\(getSearchDateString)")
         let singleMovie: Movie = movieResponse.results[0]
         
-        // Load credits and trailers for movie
-        // IMPLEMENT
-        
         return singleMovie
     }
     
@@ -75,5 +72,15 @@ final class WidgetDataService {
         }
     }
     
-    //func getCreditsAndTrailerForMovie(id: Int) async throws ->
+    func getCreditsAndTrailerForMovie(movieId: Int) async throws -> ([MovieCast], [MovieCrew], [MovieVideo]) {
+        // Load credits and trailers for movie
+        let movieCredit: MovieCredit = try await fetch(endpoint: "/movie/\(movieId)/credits", parameters: "&language=en-US")
+        let movieCast: [MovieCast] = movieCredit.cast
+        let movieCrew: [MovieCrew] = movieCredit.crew
+        
+        let movieVideoResponse: MovieVideoResponse = try await fetch(endpoint: "/movie/\(movieId)/videos", parameters: "&language=en-US")
+        let movieVideos: [MovieVideo] = movieVideoResponse.results
+        
+        return (movieCast, movieCrew, movieVideos)
+    }
 }

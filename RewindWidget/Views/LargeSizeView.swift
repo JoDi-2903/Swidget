@@ -106,7 +106,7 @@ struct DetailsView: View {
             Group {
                 HStack {
                     Text("Release: ").bold()
-                    Text(entry.movie.yearText)
+                    Text(entry.movie.releaseDate!)
                 }
                 .foregroundColor(.white)
                 .font(.body)
