@@ -36,7 +36,7 @@ struct TextOverlayMediumView: View {
         HStack (alignment: .bottom) {
             VStack(alignment: .leading) {
                 ZStack {
-                    Text("On this day \(Calendar.current.component(.year, from: Date()).advanced(by: -Int(entry.movie.yearText)!)) years ago")
+                    Text("\(Calendar.current.component(.year, from: Date()).advanced(by: -Int(entry.movie.yearText)!)) years ago today")
                         .font(.system(.headline, design: .rounded))
                         .fontWeight(.medium)
                         .kerning(-1)
