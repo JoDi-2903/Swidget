@@ -33,7 +33,7 @@ struct Provider: TimelineProvider {
         Task {
             var entries: [SimpleEntry] = []
             let reloadTimes: [Int] = [0, 8, 10, 12, 14, 16, 18, 20, 22]
-            let yearsAgo: [Int] = [2, 3, 5, 7, 10, 12, 15, 20, 30]
+            let yearsAgo: [Int] = [3, 5, 7, 10, 12, 15, 20, 25, 30]
             let currentDate = Date()
             
             do {

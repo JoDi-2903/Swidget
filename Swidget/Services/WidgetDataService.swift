@@ -62,9 +62,9 @@ final class WidgetDataService {
         return singleMovie
     }
     
-    func getMoviesFromCategory(category: String) async throws -> [Movie] {
+    func getMoviesFromCategory(category: String, language: String?) async throws -> [Movie] {
         if (category == "top_rated" || category == "popular" || category == "upcoming" || category == "now_playing") {
-            let movieResponse: MovieResponse = try await fetch(endpoint: "/movie/\(category)", parameters: "&language=en-US&page=1")
+            let movieResponse: MovieResponse = try await fetch(endpoint: "/movie/\(category)", parameters: "&language=\(language?.replacingOccurrences(of: "_", with: "-") ?? "en-US")&page=1")
             let returnMovies: [Movie] = movieResponse.results
             return returnMovies
         } else {
