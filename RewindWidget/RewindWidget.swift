@@ -10,17 +10,18 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), movie: .placeholder(2))
+        SimpleEntry(date: Date(), movie: .placeholder(2), movieCrew: [.placeholder(1), .placeholder(2)])
     }
     
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         Task {
             do {
                 let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: 5)
-                let entry = SimpleEntry(date: .now, movie: movie)
+                let (_, movieCrew, _) = try await WidgetDataService.shared.getCreditsAndTrailerForMovie(movieId: movie.id)
+                let entry = SimpleEntry(date: .now, movie: movie, movieCrew: movieCrew)
                 completion(entry)
             } catch {
-                let entry = SimpleEntry(date: .now, movie: .placeholder(2))
+                let entry = SimpleEntry(date: .now, movie: .placeholder(2), movieCrew: [.placeholder(1), .placeholder(2)])
                 completion(entry)
             }
         }
@@ -37,11 +38,12 @@ struct Provider: TimelineProvider {
                 for hourOffset in 0 ..< 5 {
                     let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
                     let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: 5)
-                    let entry = SimpleEntry(date: entryDate, movie: movie)
+                    let (_, movieCrew, _) = try await WidgetDataService.shared.getCreditsAndTrailerForMovie(movieId: movie.id)
+                    let entry = SimpleEntry(date: entryDate, movie: movie, movieCrew: movieCrew)
                     entries.append(entry)
                 }
             } catch {
-                let entry = SimpleEntry(date: .now, movie: .placeholder(2))
+                let entry = SimpleEntry(date: .now, movie: .placeholder(2), movieCrew: [.placeholder(1), .placeholder(2)])
                 entries.append(entry)
             }
             
@@ -54,6 +56,7 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let movie: Movie
+    let movieCrew: [MovieCrew]
 }
 
 struct RewindWidgetEntryView : View {
@@ -91,13 +94,13 @@ struct RewindWidget: Widget {
 struct RewindWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2)))
+            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2), movieCrew: [.placeholder(1), .placeholder(2)]))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             
-            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2)))
+            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2), movieCrew: [.placeholder(1), .placeholder(2)]))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             
-            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2)))
+            RewindWidgetEntryView(entry: SimpleEntry(date: Date(), movie: .placeholder(2), movieCrew: [.placeholder(1), .placeholder(2)]))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }

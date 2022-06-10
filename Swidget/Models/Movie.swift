@@ -178,3 +178,9 @@ extension Movie {
         }
     }
 }
+
+extension MovieCrew {
+    static func placeholder(_ id: Int) -> MovieCrew {
+        return MovieCrew(id: 123, job: "director", name: "Albert Loritz")
+    }
+}

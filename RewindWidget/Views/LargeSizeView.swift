@@ -49,9 +49,9 @@ struct TextOverlayLargeView: View {
                             .frame(width: 129, height: 200)
                             .shadow(radius: 5)
                             .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(.white, lineWidth: 3)
-                                )
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(.white, lineWidth: 3)
+                            )
                         
                     } else {
                         Image("placeholder-image")
@@ -98,10 +98,10 @@ struct DetailsView: View {
                     .foregroundColor(.white)
                     .lineLimit(2)
                     .allowsTightening(true)
-                    .shadow(radius: 5)
+                    .shadow(color: .black, radius: 6, x: 4, y: 4)
+                
+                Spacer(minLength: 17)
             }
-            
-            Spacer(minLength: 1)
             
             Group {
                 HStack {
@@ -109,7 +109,7 @@ struct DetailsView: View {
                     Text(entry.movie.releaseDate!)
                 }
                 .foregroundColor(.white)
-                .font(.body)
+                .font(.system(size: 16))
                 .lineLimit(1)
                 .shadow(radius: 5)
                 
@@ -120,7 +120,7 @@ struct DetailsView: View {
                     Text(entry.movie.ratingStars)
                 }
                 .foregroundColor(.white)
-                .font(.body)
+                .font(.system(size: 16))
                 .lineLimit(1)
                 .shadow(radius: 5)
                 
@@ -131,7 +131,7 @@ struct DetailsView: View {
                     Text(entry.movie.genreText)
                 }
                 .foregroundColor(.white)
-                .font(.body)
+                .font(.system(size: 16))
                 .lineLimit(1)
                 .shadow(radius: 5)
                 
@@ -142,7 +142,7 @@ struct DetailsView: View {
                     Text(entry.movie.durationTextShort)
                 }
                 .foregroundColor(.white)
-                .font(.body)
+                .font(.system(size: 16))
                 .lineLimit(1)
                 .allowsTightening(true)
                 .shadow(radius: 5)
@@ -156,35 +156,45 @@ struct OverviewAndCastView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Overview: ").bold()
+            Text("Overview: ")
+                .bold()
+                .font(.system(size: 16))
             Text(entry.movie.overview)
-                .font(.body)
-                .lineLimit(5)
+                .font(.system(size: 16))
+                .lineLimit(6)
                 .allowsTightening(true)
             
             Spacer(minLength: 0)
             
-            if entry.movie.directors != nil && entry.movie.directors!.count > 0 {
+            let directors = entry.movieCrew.filter({ $0.job.lowercased() == "director" })
+            if entry.movieCrew.first(where: { $0.job.lowercased() == "director" }) != nil && entry.movieCrew.count > 0 {
                 HStack {
-                    Text("Director(s): ").bold()
-                    ForEach(entry.movie.directors!.prefix(2)) { crew in
-                        Text(crew.name)
+                    if (directors.count > 1) {
+                        Text("Directors: ").bold()
+                        Text("\(directors[0].name), \(directors[1].name)")
+                    } else {
+                        Text("Director: ").bold()
+                        Text("\(directors[0].name)")
                     }
                 }
-                .font(.body)
+                .font(.system(size: 16))
                 .lineLimit(1)
             }
             
             Spacer(minLength: 0)
             
-            if entry.movie.producers != nil && entry.movie.producers!.count > 0 {
+            let producers = entry.movieCrew.filter({ $0.job.lowercased() == "producer" })
+            if entry.movieCrew.first(where: { $0.job.lowercased() == "producer" }) != nil && entry.movieCrew.count > 0 {
                 HStack {
-                    Text("Producer(s): ").bold()
-                    ForEach(entry.movie.producers!.prefix(2)) { crew in
-                        Text(crew.name)
+                    if (producers.count > 1) {
+                        Text("Producers: ").bold()
+                        Text("\(producers[0].name), \(producers[1].name)")
+                    } else {
+                        Text("Producer: ").bold()
+                        Text("\(producers[0].name)")
                     }
                 }
-                .font(.body)
+                .font(.system(size: 16))
                 .lineLimit(1)
             }
         }
