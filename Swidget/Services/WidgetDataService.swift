@@ -43,10 +43,11 @@ final class WidgetDataService {
         let randomMoviesResponse: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(randomPageNumber)&vote_count.gte=100&vote_average.gte=5")
         
         let randomMovie: Movie = randomMoviesResponse.results.randomElement()!
-       return randomMovie
+        return randomMovie
     }
     
     func getReleasedOnThisDay(yearsAgo: Int) async throws -> Movie {
+        // Calculate past date
         let getSearchDate: Date = Calendar.current.date(byAdding: .year, value: -yearsAgo, to: Date())!
         let dateFormatter = DateFormatter()
         dateFormatter.calendar = .init(identifier: .iso8601)
@@ -54,8 +55,25 @@ final class WidgetDataService {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let getSearchDateString = dateFormatter.string(from: getSearchDate)
         
+        // Get movie from discover
         let movieResponse: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=\(getSearchDateString)&primary_release_date.lte=\(getSearchDateString)")
         let singleMovie: Movie = movieResponse.results[0]
+        
+        // Load credits and trailers for movie
+        // IMPLEMENT
+        
         return singleMovie
     }
+    
+    func getMoviesFromCategory(category: String) async throws -> [Movie] {
+        if (category == "top_rated" || category == "popular" || category == "upcoming" || category == "now_playing") {
+            let movieResponse: MovieResponse = try await fetch(endpoint: "/movie/\(category)", parameters: "&language=en-US&page=1")
+            let returnMovies: [Movie] = movieResponse.results
+            return returnMovies
+        } else {
+            return [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)]
+        }
+    }
+    
+    //func getCreditsAndTrailerForMovie(id: Int) async throws ->
 }
