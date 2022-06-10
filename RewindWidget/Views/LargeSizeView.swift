@@ -21,6 +21,8 @@ struct LargeSizeView: View {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFit()
+                            .brightness(-0.15)
+                            .blur(radius: 1)
                     } else {
                         Image("placeholder-image")
                     }
@@ -45,8 +47,11 @@ struct TextOverlayLargeView: View {
                         Image(uiImage: uiImage)
                             .resizable()
                             .frame(width: 129, height: 200)
-                            .cornerRadius(12)
                             .shadow(radius: 5)
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(.white, lineWidth: 3)
+                                )
                         
                     } else {
                         Image("placeholder-image")
