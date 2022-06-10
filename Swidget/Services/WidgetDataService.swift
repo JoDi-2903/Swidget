@@ -37,31 +37,25 @@ final class WidgetDataService {
     }
     
     func getRandomMovie() async throws -> Movie {
-        let randomPageNumber = Int.random(in: 1...500)
+        let randomPageNumber = Int.random(in: 1...200)
         
         // There are currently 14974 results and 749 pages for the selected parameters
         let randomMoviesResponse: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(randomPageNumber)&vote_count.gte=100&vote_average.gte=5")
-//        let randomMovies: [Movie] = randomMoviesResponse //randomElement() ?? .placeholder(2)
-//        let randomMovie: Movie = randomMovies.randomElement()
-//        return randomMovie
-        return .placeholder(2)
+        
+        let randomMovie: Movie = randomMoviesResponse.results.randomElement()!
+       return randomMovie
     }
-//    func getRandomMovie() async throws -> Movie {
-//        let (latestMovie, _): (Movie, Int) = try await fetch(from: "/movie/latest")
-//        let highestMovieId: Int = latestMovie.id
-//
-//        var (randomMovie, httpResponseCode): (Movie, Int)
-//        var randomId: Int
-//        repeat {
-//                randomId = Int.random(in: 1...highestMovieId)
-//                (randomMovie, httpResponseCode) = try await fetch(from: "/movie/\(randomId)")
-//        } while (httpResponseCode != 200 && randomMovie.backdropPath != nil && randomMovie.posterPath != nil && randomMovie.releaseDate != nil && randomMovie.adult == false);
-//
-//        return randomMovie
-//    }
     
     func getReleasedOnThisDay(yearsAgo: Int) async throws -> Movie {
-        let response: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2019-06-09&primary_release_date.lte=2019-06-09")
-        return .placeholder(2)
+        let getSearchDate: Date = Calendar.current.date(byAdding: .year, value: -yearsAgo, to: Date())!
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = .init(identifier: .iso8601)
+        dateFormatter.locale = .init(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let getSearchDateString = dateFormatter.string(from: getSearchDate)
+        
+        let movieResponse: MovieResponse = try await fetch(endpoint: "/discover/movie", parameters: "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=\(getSearchDateString)&primary_release_date.lte=\(getSearchDateString)")
+        let singleMovie: Movie = movieResponse.results[0]
+        return singleMovie
     }
 }

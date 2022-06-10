@@ -139,7 +139,7 @@ struct DetailsView: View {
                 
                 HStack {
                     Text("Runtime: ").bold()
-                    Text(entry.movie.durationText)
+                    Text(entry.movie.durationTextShort)
                 }
                 .foregroundColor(.white)
                 .font(.body)
@@ -156,6 +156,7 @@ struct OverviewAndCastView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            Text("Overview: ").bold()
             Text(entry.movie.overview)
                 .font(.body)
                 .lineLimit(5)
