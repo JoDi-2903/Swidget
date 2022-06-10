@@ -81,6 +81,6 @@ final class WidgetDataService {
         let movieVideoResponse: MovieVideoResponse = try await fetch(endpoint: "/movie/\(movieId)/videos", parameters: "&language=en-US")
         let movieVideos: [MovieVideo] = movieVideoResponse.results
         
-        return (movieCast, [.placeholder(1), .placeholder(2)], movieVideos)
+        return (movieCast, movieCrew, movieVideos)
     }
 }
