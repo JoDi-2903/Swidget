@@ -26,28 +26,40 @@ struct Provider: IntentTimelineProvider {
     }
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
     }
     
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        //let conf = category(for: configuration)
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
-        completion(entry)
+        Task {
+            do {
+                //let conf = category(for: configuration)
+                let movies = try await WidgetDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
+                completion(entry)
+            } catch {
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
+                completion(entry)
+            }
+        }
     }
     
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-        
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+        Task {
+            do {
+                let movies = try await WidgetDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
+                let currentDate = Date()
+                let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!
+                let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
+                completion(timeline)
+            } catch {
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
+                let currentDate = Date()
+                let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!
+                let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
+                completion(timeline)
+            }
         }
-        
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
 }
 
@@ -74,13 +86,22 @@ public enum OverviewCategory: Int {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+    let movies: [Movie]
 }
 
 struct CategoryWidgetEntryView : View {
+    @Environment(\.widgetFamily) var widgetFamily
     var entry: Provider.Entry
     
     var body: some View {
-        Text(entry.date, style: .time)
+        switch widgetFamily {
+        case .systemMedium:
+            MediumSizeView(entry: entry)
+        case .systemLarge:
+            LargeSizeView(entry: entry)
+        default:
+            Text("Not implemented!")
+        }
     }
 }
 
@@ -101,10 +122,10 @@ struct CategoryWidget: Widget {
 struct CategoryWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)]))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             
-            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)]))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }
