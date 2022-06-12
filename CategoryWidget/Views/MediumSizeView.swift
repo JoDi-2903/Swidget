@@ -18,9 +18,9 @@ struct MediumSizeView: View {
                     .bold()
                     .lineLimit(1)
             }
-            .padding(.all)
+            .padding(.all, 5)
             
-            Spacer(minLength: 0)
+            Spacer(minLength: 4)
             
             HStack(alignment: .bottom) {
                 ForEach((0...3), id: \.self) {
@@ -33,20 +33,16 @@ struct MediumSizeView: View {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .scaledToFit()
-                                .shadow(radius: 5)
+                                .shadow(radius: 7)
+                                .cornerRadius(8)
                             
                         } else {
                             Image("placeholder-image")
                         }
                     }
-                    
-                    //                    Spacer(minLength: 0)
-                    //
-                    //                    Text(entry.movies[0].title)
                 }
             }
-            .padding(.all)
         }
-        .padding(.all)
+        .padding(.all, 7)
     }
 }
