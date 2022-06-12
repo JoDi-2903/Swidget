@@ -10,20 +10,20 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    func category(for config: ConfigurationIntent) -> OverviewCategory {
-        switch config.category {
-        case .top_rated:
-            return .top_rated
-        case .popular:
-            return .popular
-        case .now_playing:
-            return .now_playing
-        case .upcoming:
-            return .upcoming
-        default:
-            return .top_rated
-        }
-    }
+//    func category(for config: ConfigurationIntent) -> OverviewCategory {
+//        switch config.category {
+//        case .top_rated:
+//            return .top_rated
+//        case .popular:
+//            return .popular
+//        case .now_playing:
+//            return .now_playing
+//        case .upcoming:
+//            return .upcoming
+//        default:
+//            return .top_rated
+//        }
+//    }
     
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
@@ -63,25 +63,25 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-public enum OverviewCategory: Int {
-    case top_rated = 1
-    case popular = 2
-    case now_playing = 3
-    case upcoming = 4
-    
-    func description() -> String {
-        switch self {
-        case .top_rated:
-            return "Top Rated"
-        case .popular:
-            return "Popular"
-        case .now_playing:
-            return "Now Playing"
-        case .upcoming:
-            return "Upcoming"
-        }
-    }
-}
+//public enum OverviewCategory: Int {
+//    case top_rated = 1
+//    case popular = 2
+//    case now_playing = 3
+//    case upcoming = 4
+//
+//    func description() -> String {
+//        switch self {
+//        case .top_rated:
+//            return "Top Rated"
+//        case .popular:
+//            return "Popular"
+//        case .now_playing:
+//            return "Now Playing"
+//        case .upcoming:
+//            return "Upcoming"
+//        }
+//    }
+//}
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
