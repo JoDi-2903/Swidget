@@ -23,5 +23,6 @@ struct SmallSizeView: View {
                 Image("placeholder-image")
             }
         }
+        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)"))
     }
 }

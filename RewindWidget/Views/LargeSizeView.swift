@@ -31,6 +31,7 @@ struct LargeSizeView: View {
             }
         }
         .overlay(TextOverlayLargeView(entry: entry))
+        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)"))
     }
 }
 

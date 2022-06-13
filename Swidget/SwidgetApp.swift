@@ -34,7 +34,7 @@ struct SwidgetApp: App {
                     }
                     .tag(1)
                 
-                StartPageView()
+                SearchMovieView()
                     .tabItem {
                         VStack {
                             Image(systemName: "magnifyingglass")

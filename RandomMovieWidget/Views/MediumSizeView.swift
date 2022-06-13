@@ -27,6 +27,7 @@ struct MediumSizeView: View {
             }
         }
         .overlay(TextOverlayView(entry: entry))
+        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)"))
     }
 }
 

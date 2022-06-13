@@ -25,6 +25,7 @@ struct SmallSizeView: View {
             }
         }
         .overlay(TextOverlaySmallView(entry: entry))
+        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)"))
     }
 }
 
@@ -55,6 +56,5 @@ struct TextOverlaySmallView: View {
             Spacer(minLength: 0)
         }
         .padding(.all)
-        
     }
 }
