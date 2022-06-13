@@ -83,4 +83,10 @@ final class WidgetDataService {
         
         return (movieCast, movieCrew, movieVideos)
     }
+    
+    func getMoviesFromSearch(query: String) async throws -> [Movie] {
+        let searchResponse: MovieResponse = try await fetch(endpoint: "/search/movie", parameters: "&language=en-US&query=\(query)&page=1&include_adult=false")
+        let returnMovies: [Movie] = searchResponse.results
+        return returnMovies
+    }
 }
