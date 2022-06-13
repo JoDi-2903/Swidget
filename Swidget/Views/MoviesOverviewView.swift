@@ -15,11 +15,6 @@ struct MoviesOverviewView: View {
     @State var upcomingMovies: [Movie] = []
     @State var selectedMovie: Movie?
     
-    //    @ObservedObject private var nowPlayingState = MovieListState()
-    //    @ObservedObject private var upcomingState = MovieListState()
-    //    @ObservedObject private var topRatedState = MovieListState()
-    //    @ObservedObject private var popularState = MovieListState()
-    
     var body: some View {
         NavigationView {
             List(nowPlayingMovies) { movie in

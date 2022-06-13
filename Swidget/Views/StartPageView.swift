@@ -14,8 +14,8 @@ struct StartPageView: View {
                 Section {
                     VStack(alignment: .leading) {
                         Image("WidgetKit_TMDB_Icons")
-                                    .resizable()
-                                    .scaledToFit()
+                            .resizable()
+                            .scaledToFit()
                         
                         Spacer(minLength: 5)
                         
@@ -28,7 +28,7 @@ struct StartPageView: View {
                         .font(.headline)
                         .bold()
                         .padding(.all, 5)
-                        //.padding(.bottom, 10)
+                    //.padding(.bottom, 10)
                     Text("1. From the Home Screen, touch and hold a widget or an empty area until the apps jiggle.")
                     Text("2. Tap the Add button Grey add button in the top left-hand corner.")
                     Text("3. Select a widget, choose from the three different widget sizes, then tap Add Widget.")
@@ -36,6 +36,26 @@ struct StartPageView: View {
                 }
             }
             .navigationTitle("Welcome to Swidget")
+        }
+        // Handle opening App through link in widget
+        .onOpenURL { url in
+            guard
+                url.scheme == "swidget",
+                url.host == "movie",
+                let id = Int(url.pathComponents[1])
+            else {
+                print("Error openening App through widget URL.")
+                return
+            }
+            
+            // Open MovieDetailView with id from URL
+//            Task {
+//                do {
+//                    movie = try await WidgetDataService.shared.getMovieFromId(id: id)
+//                } catch {
+//                    return
+//                }
+//            }
         }
     }
 }
