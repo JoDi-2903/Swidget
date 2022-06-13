@@ -40,32 +40,35 @@ struct LargeSizeView: View {
                         }
                     }
                     
+                    Spacer(minLength: 4)
+                    
                     VStack(alignment: .trailing) {
                         Text(entry.movies[arrayElement].title)
-                            .font(.caption2)
+                            .font(.headline)
                             .bold()
                             .lineLimit(1)
                             .allowsTightening(true)
+                            .padding(.bottom, 2)
                         
                         Text(entry.movies[arrayElement].releaseDate ?? "n/a")
-                            .font(.body)
+                            .font(.subheadline)
                             .lineLimit(1)
                             .allowsTightening(true)
                         
                         Text(entry.movies[arrayElement].ratingStars)
-                            .font(.body)
+                            .font(.subheadline)
                             .lineLimit(1)
                             .allowsTightening(true)
                         
-                        Text(entry.movies[arrayElement].genreText)
-                            .font(.body)
-                            .lineLimit(1)
-                            .allowsTightening(true)
-                        
-                        Text(entry.movies[arrayElement].durationTextShort)
-                            .font(.body)
-                            .lineLimit(1)
-                            .allowsTightening(true)
+//                        Text(entry.movies[arrayElement].genreText)
+//                            .font(.subheadline)
+//                            .lineLimit(1)
+//                            .allowsTightening(true)
+//
+//                        Text(entry.movies[arrayElement].durationTextShort)
+//                            .font(.subheadline)
+//                            .lineLimit(1)
+//                            .allowsTightening(true)
                     }
                 }
             }

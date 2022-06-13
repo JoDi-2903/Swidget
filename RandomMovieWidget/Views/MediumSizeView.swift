@@ -54,6 +54,6 @@ struct TextOverlayView: View {
             .padding(.all)
             Spacer(minLength: 0)
         }
-        .padding(.all)
+        .padding(.all, 10)
     }
 }

@@ -25,7 +25,7 @@ struct StartPageView: View {
                 }
                 Section {
                     Text("Add widgets to your Home Screen")
-                        .font(.title3)
+                        .font(.headline)
                         .bold()
                         .padding(.all, 5)
                         //.padding(.bottom, 10)

@@ -41,6 +41,20 @@ struct MoviesOverviewView: View {
                     print("Error loading the movies from API! \(error)")
                 }
             }
+            .sheet(item: $selectedMovie) { movie in
+                GroupBox {
+                    VStack(alignment: .leading) {
+                        Text(movie.title)
+                            .font(.headline)
+                        
+                        Text(movie.overview)
+                            .font(.body)
+                    }
+                } label: {
+                    Label("Movie details", systemImage: "person")
+                }
+                .padding()
+            }
         }
         
         //        NavigationView {
