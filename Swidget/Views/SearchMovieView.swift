@@ -8,8 +8,41 @@
 import SwiftUI
 
 struct SearchMovieView: View {
+    @State var searchResultMovies: [Movie] = []
+    @State private var searchText: String = ""
+    
     var body: some View {
-        Text("Hello, SearchView!")
+        NavigationView {
+            VStack {
+                SearchBar(text: $searchText, onTextChanged: searchMovies)
+                
+                List(searchResultMovies) { movie in
+                    NavigationLink(destination: MovieDetailView(movieId: movie.id), label: {
+                        Text(movie.title)
+                    })
+                }
+            }
+            .navigationTitle("Movies Overview")
+            .task {
+                do {
+                    searchResultMovies = try await WidgetDataService.shared.getMoviesFromSearch(query: "Sonic")
+                } catch {
+                    print("Error loading the movies from API! \(error)")
+                }
+            }
+        }
+    }
+    
+    func searchMovies(for searchText: String) {
+        if !searchText.isEmpty {
+            Task {
+                do {
+                    searchResultMovies = try await WidgetDataService.shared.getMoviesFromSearch(query: searchText)
+                } catch {
+                    print("Error loading the movies from API! \(error)")
+                }
+            }
+        }
     }
 }
 

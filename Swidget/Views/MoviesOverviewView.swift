@@ -18,12 +18,9 @@ struct MoviesOverviewView: View {
     var body: some View {
         NavigationView {
             List(nowPlayingMovies) { movie in
-                Button {
-                    selectedMovie = movie
-                } label: {
+                NavigationLink(destination: MovieDetailView(movieId: movie.id), label: {
                     Text(movie.title)
-                }
-                .buttonStyle(.plain)
+                })
             }
             .navigationTitle("Movies Overview")
             .task {
@@ -36,20 +33,20 @@ struct MoviesOverviewView: View {
                     print("Error loading the movies from API! \(error)")
                 }
             }
-            .sheet(item: $selectedMovie) { movie in
-                GroupBox {
-                    VStack(alignment: .leading) {
-                        Text(movie.title)
-                            .font(.headline)
-                        
-                        Text(movie.overview)
-                            .font(.body)
-                    }
-                } label: {
-                    Label("Movie details", systemImage: "person")
-                }
-                .padding()
-            }
+//            .sheet(item: $selectedMovie) { movie in
+//                GroupBox {
+//                    VStack(alignment: .leading) {
+//                        Text(movie.title)
+//                            .font(.headline)
+//
+//                        Text(movie.overview)
+//                            .font(.body)
+//                    }
+//                } label: {
+//                    Label("Movie details", systemImage: "person")
+//                }
+//                .padding()
+//            }
         }
         
         //        NavigationView {

@@ -36,6 +36,7 @@
 		AB3AA76A285673120006EA4F /* CategoryWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AB98D4FF2853DC6000F95561 /* CategoryWidget.intentdefinition */; };
 		AB3AA76C2857CAA20006EA4F /* SearchMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA76B2857CAA20006EA4F /* SearchMovieView.swift */; };
 		AB3AA76E2857D6220006EA4F /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA76D2857D6220006EA4F /* MovieDetailView.swift */; };
+		AB3AA7742858E55A0006EA4F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA7732858E55A0006EA4F /* SearchBar.swift */; };
 		AB98D4FA2853DC6000F95561 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC4AD38284BB39300B5942A /* WidgetKit.framework */; };
 		AB98D4FB2853DC6000F95561 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC4AD3A284BB39300B5942A /* SwiftUI.framework */; };
 		AB98D4FE2853DC6000F95561 /* CategoryWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB98D4FD2853DC6000F95561 /* CategoryWidget.swift */; };
@@ -140,6 +141,7 @@
 		AB3AA76128563E160006EA4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3AA76B2857CAA20006EA4F /* SearchMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieView.swift; sourceTree = "<group>"; };
 		AB3AA76D2857D6220006EA4F /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		AB3AA7732858E55A0006EA4F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		AB98D4F92853DC6000F95561 /* CategoryWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CategoryWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB98D4FD2853DC6000F95561 /* CategoryWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWidget.swift; sourceTree = "<group>"; };
 		AB98D4FF2853DC6000F95561 /* CategoryWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CategoryWidget.intentdefinition; sourceTree = "<group>"; };
@@ -266,10 +268,10 @@
 				ABC4AD2A284B78F900B5942A /* Views */,
 				ABC4AD21284B642100B5942A /* Services */,
 				ABC4AD1E284B62FA00B5942A /* Models */,
-				AB28DEC0281374C4001F3471 /* SwidgetApp.swift */,
+				AB3AA76F2858E43C0006EA4F /* Tools */,
 				AB28DEC4281374C6001F3471 /* Assets.xcassets */,
+				AB28DEC0281374C4001F3471 /* SwidgetApp.swift */,
 				AB28DEC6281374C6001F3471 /* Preview Content */,
-				ABC4AD26284B677100B5942A /* Utils.swift */,
 			);
 			path = Swidget;
 			sourceTree = "<group>";
@@ -298,6 +300,15 @@
 				AB3AA76128563E160006EA4F /* Info.plist */,
 			);
 			path = SwidgetIntents;
+			sourceTree = "<group>";
+		};
+		AB3AA76F2858E43C0006EA4F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				ABC4AD26284B677100B5942A /* Utils.swift */,
+				AB3AA7732858E55A0006EA4F /* SearchBar.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		AB98D4FC2853DC6000F95561 /* CategoryWidget */ = {
@@ -604,6 +615,7 @@
 				ABC4AD25284B663000B5942A /* MovieStore.swift in Sources */,
 				ABA916B8284D10000089A9E9 /* PosterCardView.swift in Sources */,
 				AB3AA76E2857D6220006EA4F /* MovieDetailView.swift in Sources */,
+				AB3AA7742858E55A0006EA4F /* SearchBar.swift in Sources */,
 				AB04A49528521C9E00EC7C05 /* WidgetDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
