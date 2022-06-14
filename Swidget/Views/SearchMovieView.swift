@@ -18,18 +18,17 @@ struct SearchMovieView: View {
                 
                 List(searchResultMovies) { movie in
                     NavigationLink(destination: MovieDetailView(movieId: movie.id), label: {
-                        Text(movie.title)
+                        VStack(alignment: .leading) {
+                            Text(movie.title)
+                            Text(movie.yearText)
+                                .font(.subheadline)
+                                .italic()
+                                .foregroundColor(.orange)
+                        }
                     })
                 }
             }
-            .navigationTitle("Movies Overview")
-            .task {
-                do {
-                    searchResultMovies = try await WidgetDataService.shared.getMoviesFromSearch(query: "Sonic")
-                } catch {
-                    print("Error loading the movies from API! \(error)")
-                }
-            }
+            .navigationTitle("Search")
         }
     }
     
@@ -42,6 +41,9 @@ struct SearchMovieView: View {
                     print("Error loading the movies from API! \(error)")
                 }
             }
+        } else {
+            // remove search result when a user clear keyword.
+            searchResultMovies.removeAll()
         }
     }
 }
