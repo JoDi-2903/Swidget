@@ -19,7 +19,7 @@ struct MovieDetailView: View {
         }
         .task {
             do {
-                movie = try await WidgetDataService.shared.getMovieFromId(id: movieId)
+                movie = try await MovieDataService.shared.getMovieFromId(id: movieId)
             } catch {
                 print("Error loading the movie from API! \(error)")
             }

@@ -16,7 +16,7 @@ struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         Task {
             do {
-                let movie = try await WidgetDataService.shared.getRandomMovie()
+                let movie = try await MovieDataService.shared.getRandomMovie()
                 let entry = SimpleEntry(date: .now, movie: movie)
                 completion(entry)
             } catch {
@@ -29,7 +29,7 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
             do {
-                let movie = try await WidgetDataService.shared.getRandomMovie() //.getMovieFromId(id: 526896)
+                let movie = try await MovieDataService.shared.getRandomMovie() //.getMovieFromId(id: 526896)
                 let entry = SimpleEntry(date: .now, movie: movie)
                 
                 // Construct a timeline with a single entry and tell it to refresh after some spacific date has passed

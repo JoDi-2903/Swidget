@@ -25,10 +25,10 @@ struct MoviesOverviewView: View {
             .navigationTitle("Movies Overview")
             .task {
                 do {
-                    nowPlayingMovies = try await WidgetDataService.shared.getMoviesFromCategory(category: "now_playing", language: "en-US")
-                    popularMovies = try await WidgetDataService.shared.getMoviesFromCategory(category: "popular", language: "en-US")
-                    topRatedMovies = try await WidgetDataService.shared.getMoviesFromCategory(category: "top_rated", language: "en-US")
-                    upcomingMovies = try await WidgetDataService.shared.getMoviesFromCategory(category: "upcoming", language: "en-US")
+                    nowPlayingMovies = try await MovieDataService.shared.getMoviesFromCategory(category: "now_playing", language: "en-US")
+                    popularMovies = try await MovieDataService.shared.getMoviesFromCategory(category: "popular", language: "en-US")
+                    topRatedMovies = try await MovieDataService.shared.getMoviesFromCategory(category: "top_rated", language: "en-US")
+                    upcomingMovies = try await MovieDataService.shared.getMoviesFromCategory(category: "upcoming", language: "en-US")
                 } catch {
                     print("Error loading the movies from API! \(error)")
                 }

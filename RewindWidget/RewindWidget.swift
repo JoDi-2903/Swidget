@@ -16,8 +16,8 @@ struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         Task {
             do {
-                let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: 5)
-                let (_, movieCrew, _) = try await WidgetDataService.shared.getCreditsAndTrailerForMovie(movieId: movie.id)
+                let movie = try await MovieDataService.shared.getReleasedOnThisDay(yearsAgo: 5)
+                let (_, movieCrew, _) = try await MovieDataService.shared.getCreditsAndTrailerForMovie(movieId: movie.id)
                 let entry = SimpleEntry(date: .now, movie: movie, movieCrew: movieCrew)
                 completion(entry)
             } catch {
@@ -39,8 +39,8 @@ struct Provider: TimelineProvider {
             do {
                 for scheduleNumber in 0 ... 8 {
                     let entryDate = Calendar.current.date(bySettingHour: reloadTimes[scheduleNumber], minute: 0, second: 0, of: currentDate)!
-                    let movie = try await WidgetDataService.shared.getReleasedOnThisDay(yearsAgo: yearsAgo[scheduleNumber])
-                    let (_, movieCrew, _) = try await WidgetDataService.shared.getCreditsAndTrailerForMovie(movieId: movie.id)
+                    let movie = try await MovieDataService.shared.getReleasedOnThisDay(yearsAgo: yearsAgo[scheduleNumber])
+                    let (_, movieCrew, _) = try await MovieDataService.shared.getCreditsAndTrailerForMovie(movieId: movie.id)
                     let entry = SimpleEntry(date: entryDate, movie: movie, movieCrew: movieCrew)
                     entries.append(entry)
                 }

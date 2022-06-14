@@ -33,7 +33,7 @@ struct Provider: IntentTimelineProvider {
         Task {
             do {
                 //let conf = category(for: configuration)
-                let movies = try await WidgetDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
+                let movies = try await MovieDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
                 let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
                 completion(entry)
             } catch {
@@ -46,7 +46,7 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
             do {
-                let movies = try await WidgetDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
+                let movies = try await MovieDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
                 let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
                 let currentDate = Date()
                 let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!

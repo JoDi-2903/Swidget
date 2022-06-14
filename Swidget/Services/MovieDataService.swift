@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class WidgetDataService {
-    static let shared = WidgetDataService()
+final class MovieDataService {
+    static let shared = MovieDataService()
     
     private let apiKey = "5221e1317dbf91f51363a72bc6c98904"
     private let baseAPIURL = "https://api.themoviedb.org/3"
