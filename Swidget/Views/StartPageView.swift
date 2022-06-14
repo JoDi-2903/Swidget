@@ -19,7 +19,7 @@ struct StartPageView: View {
                         
                         Spacer(minLength: 5)
                         
-                        Text("Hello, Swidget! Some descriptive text ...")
+                        Text("Hello, Swidget! Some descriptive text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. At volutpat diam ut venenatis tellus in metus vulputate eu. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Libero nunc consequat interdum varius sit amet mattis. Lacus laoreet non curabitur gravida arcu ac tortor.")
                     }
                     .padding(.all, 10)
                 }

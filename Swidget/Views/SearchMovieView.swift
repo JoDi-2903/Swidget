@@ -36,7 +36,7 @@ struct SearchMovieView: View {
         if !searchText.isEmpty {
             Task {
                 do {
-                    searchResultMovies = try await MovieDataService.shared.getMoviesFromSearch(query: searchText)
+                    searchResultMovies = try await MovieDataService.shared.getMoviesFromSearch(query: searchText.replacingOccurrences(of: " ", with: "%20"))
                 } catch {
                     print("Error loading the movies from API! \(error)")
                 }
