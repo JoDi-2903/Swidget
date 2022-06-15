@@ -17,11 +17,18 @@ struct MoviesOverviewView: View {
     
     var body: some View {
         NavigationView {
-            List(nowPlayingMovies) { movie in
-                NavigationLink(destination: MovieDetailView(movieId: movie.id), label: {
-                    Text(movie.title)
-                })
+            ScrollView {
+                MovieSliderView(title: "Now Playing", movies: nowPlayingMovies)
+                MovieSliderView(title: "Popular", movies: popularMovies)
+                MovieSliderView(title: "Top Rated", movies: topRatedMovies)
+                MovieSliderView(title: "Upcoming", movies: upcomingMovies)
             }
+            
+//            List(nowPlayingMovies) { movie in
+//                NavigationLink(destination: MovieDetailView(movieId: movie.id), label: {
+//                    Text(movie.title)
+//                })
+//            }
             .navigationTitle("Movies Overview")
             .task {
                 do {
