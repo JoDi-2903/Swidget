@@ -82,69 +82,17 @@ struct MovieDetailView: View {
                     
                     Divider()
                     
-                    // Cast
-                    HStack {
-                        VStack(alignment: .leading) {
-                            if (movieCast.count > 0) {
-                                Text("Cast: ").bold()
-                                ForEach(movieCast.prefix(9)) { cast in
-                                    Text(cast.name)
-                                        .lineLimit(1)
-                                        .allowsTightening(true)
-                                }
-                            }
-                        }
-                        
-                        Spacer(minLength: 5)
-                        
-                        VStack(alignment: .leading) {
-                            if (movieCast.count > 0) {
-                                Text("")
-                                ForEach(movieCast.prefix(9)) { cast in
-                                    Text("as \(cast.character)")
-                                        .foregroundColor(.orange)
-                                        .lineLimit(1)
-                                        .allowsTightening(true)
-                                }
-                            }
-                        }
-                    }
+                    // Cast and Crew
+                    MovieCreditsView(movieCast: movieCast, movieCrew: movieCrew)
                     
                     Divider()
                     
-                    // Crew
-                    if (movieCrew.count > 0) {
-                        HStack(alignment: .top) {
-                            VStack(alignment: .leading) {
-                                Text("Producer(s): ").bold()
-                                ForEach(movieCrew.filter({ $0.job.lowercased() == "producer" }).sorted(by: { $0.name < $1.name }).prefix(4)) { crew in
-                                    Text(crew.name)
-                                        .lineLimit(1)
-                                        .allowsTightening(true)
-                                }
-                            }
-                            
-                            Spacer(minLength: 7)
-                            
-                            VStack(alignment: .leading) {
-                                Text("Director(s): ").bold()
-                                ForEach(movieCrew.filter({ $0.job.lowercased() == "director" }).sorted(by: { $0.name < $1.name }).prefix(1)) { crew in
-                                    Text(crew.name)
-                                        .lineLimit(1)
-                                        .allowsTightening(true)
-                                }
-                                
-                                Spacer(minLength: 0)
-                                
-                                Text("Screenwriter(s): ").bold()
-                                ForEach(movieCrew.filter({ $0.job.lowercased() == "story" }).sorted(by: { $0.name < $1.name }).prefix(1)) { crew in
-                                    Text(crew.name)
-                                        .lineLimit(1)
-                                }
-                            }
-                        }
+                    // Trailer
+                    if movieVideo.filter({ $0.site.lowercased() == "youtube" }).count > 0 {
+                        let video = movieVideo.filter({ $0.site.lowercased() == "youtube" })
+                        Link("Watch trailer", destination: URL(string: "https://youtube.com/watch?v=\(video[0].key)")!)
+                            .foregroundColor(.orange)
                     }
-                    
                 }
             }
             .navigationTitle(movie.title)
@@ -155,6 +103,75 @@ struct MovieDetailView: View {
                 (movieCast, movieCrew, movieVideo) = try await MovieDataService.shared.getCreditsAndTrailerForMovie(movieId: movieId)
             } catch {
                 print("Error loading the movie from API! \(error)")
+            }
+        }
+    }
+}
+
+
+struct MovieCreditsView: View {
+    let movieCast: [MovieCast]
+    let movieCrew: [MovieCrew]
+    
+    var body: some View {
+        // Cast
+        HStack {
+            VStack(alignment: .leading) {
+                if (movieCast.count > 0) {
+                    Text("Cast: ").bold()
+                    ForEach(movieCast.prefix(9)) { cast in
+                        Text(cast.name)
+                            .lineLimit(1)
+                            .allowsTightening(true)
+                    }
+                }
+            }
+            
+            Spacer(minLength: 5)
+            
+            VStack(alignment: .leading) {
+                if (movieCast.count > 0) {
+                    Text("")
+                    ForEach(movieCast.prefix(9)) { cast in
+                        Text("as \(cast.character)")
+                            .foregroundColor(.orange)
+                            .lineLimit(1)
+                            .allowsTightening(true)
+                    }
+                }
+            }
+        }
+        
+        // Crew
+        if (movieCrew.count > 0) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    Text("Producer(s): ").bold()
+                    ForEach(movieCrew.filter({ $0.job.lowercased() == "producer" }).sorted(by: { $0.name < $1.name }).prefix(4)) { crew in
+                        Text(crew.name)
+                            .lineLimit(1)
+                            .allowsTightening(true)
+                    }
+                }
+                
+                Spacer(minLength: 7)
+                
+                VStack(alignment: .leading) {
+                    Text("Director(s): ").bold()
+                    ForEach(movieCrew.filter({ $0.job.lowercased() == "director" }).sorted(by: { $0.name < $1.name }).prefix(1)) { crew in
+                        Text(crew.name)
+                            .lineLimit(1)
+                            .allowsTightening(true)
+                    }
+                    
+                    Spacer(minLength: 0)
+                    
+                    Text("Screenwriter(s): ").bold()
+                    ForEach(movieCrew.filter({ $0.job.lowercased() == "story" }).sorted(by: { $0.name < $1.name }).prefix(1)) { crew in
+                        Text(crew.name)
+                            .lineLimit(1)
+                    }
+                }
             }
         }
     }
