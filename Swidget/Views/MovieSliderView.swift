@@ -30,7 +30,7 @@ struct MovieSliderView: View {
             HStack(alignment: .top, spacing: 16) {
                 ForEach(movies.prefix(19)) { movie in
                     NavigationLink(destination: MovieDetailView(movieId: movie.id), label: {
-                        VStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 8) {
                             Group {
                                 if let url = URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "")"), let imageData = try? Data(contentsOf: url),
                                    let uiImage = UIImage(data: imageData) {
@@ -50,32 +50,18 @@ struct MovieSliderView: View {
                                 .font(.title3)
                                 .multilineTextAlignment(.leading)
                                 .lineLimit(2)
+                            
+                            Text(movie.yearText)
+                                .foregroundColor(.orange)
+                                .font(.subheadline)
+                                .italic()
+                                .lineLimit(1)
                         }
                         .frame(width: 129, height: 300)
                     })
                 }
             }
         }
-        
-        //        VStack(alignment: .leading, spacing: 16) {
-        //            Text(title)
-        //                .font(.title)
-        //                .fontWeight(.bold)
-        //                .padding(.horizontal)
-        //
-        //            ScrollView(.horizontal, showsIndicators: false) {
-        //                HStack(alignment: .top, spacing: 16) {
-        //                    ForEach(self.movies) { movie in
-        //                        PosterCardView(movie: movie)
-        ////                        NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
-        ////                            PosterCardView(movie: movie)
-        ////                        }.buttonStyle(PlainButtonStyle())
-        ////                            .padding(.leading, movie.id == self.movies.first!.id ? 16 : 0)
-        ////                            .padding(.trailing, movie.id == self.movies.last!.id ? 16 : 0)
-        //                    }
-        //                }
-        //            }
-        //        }
     }
 }
 
