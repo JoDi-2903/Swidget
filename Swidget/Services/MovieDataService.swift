@@ -31,6 +31,7 @@ final class MovieDataService {
         return result
     }
     
+    // Requests
     func getMovieFromId(id: Int) async throws -> Movie {
         let movie: Movie = try await fetch(endpoint: "/movie/\(id)", parameters: "&language=en-US")
         return movie

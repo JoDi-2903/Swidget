@@ -28,14 +28,6 @@ struct Movie: Decodable, Identifiable {
     let credits: MovieCredit?
     let videos: MovieVideoResponse?
     
-    var posterURL: URL {
-        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
-    }
-    
-    var backdropURL: URL {
-        return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
-    }
-    
     var genreText: String {
         genres?.first?.name ?? "n/a"
     }
@@ -79,50 +71,13 @@ struct Movie: Decodable, Identifiable {
     }
     
     // Convert runtime of movie to hours and minutes
-    static private let durationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
-        formatter.allowedUnits = [.hour, .minute]
-        return formatter
-    }()
-    
-    var durationText: String {
-        guard let runtime = self.runtime, runtime > 0 else {
-            return "n/a"
-        }
-        return Movie.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? "n/a"
-    }
-    
     var durationTextShort: String {
         guard let runtime = self.runtime, runtime > 0 else {
             return "n/a"
         }
-        //return Movie.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? "n/a"
         let runtimeHours: Int = Int(floor(Double(runtime / 60)))
         let runtimeMinutes: Int = runtime % 60
         return String("\(runtimeHours) h \(runtimeMinutes) min")
-    }
-    
-    // Convert credits
-    var cast: [MovieCast]? {
-        credits?.cast
-    }
-    var crew: [MovieCrew]? {
-        credits?.crew
-    }
-    var directors: [MovieCrew]? {
-        crew?.filter { $0.job.lowercased() == "director" }
-    }
-    var producers: [MovieCrew]? {
-        crew?.filter { $0.job.lowercased() == "producer" }
-    }
-    var screenWriters: [MovieCrew]? {
-        crew?.filter { $0.job.lowercased() == "story" }
-    }
-    
-    // Create URLs for trailers
-    var youtubeTrailers: [MovieVideo]? {
-        videos?.results.filter { $0.youtubeURL != nil }
     }
 }
 
