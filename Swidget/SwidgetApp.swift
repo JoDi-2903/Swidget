@@ -11,7 +11,7 @@ import SwiftUI
 struct SwidgetApp: App {
     init() {
         UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
-        }
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -44,6 +44,11 @@ struct SwidgetApp: App {
                     .tag(2)
             }
             .accentColor(.orange)
+            
+            // Handle opening App through link in widget
+            .onOpenURL { url in
+                print("url: \(url)")
+            }
         }
     }
 }
