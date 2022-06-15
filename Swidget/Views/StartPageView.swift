@@ -43,19 +43,11 @@ struct StartPageView: View {
                 url.scheme == "swidget",
                 url.host == "movie",
                 let id = Int(url.pathComponents[1])
+                    
             else {
                 print("Error openening App through widget URL.")
                 return
             }
-            
-            // Open MovieDetailView with id from URL
-//            Task {
-//                do {
-//                    movie = try await WidgetDataService.shared.getMovieFromId(id: id)
-//                } catch {
-//                    return
-//                }
-//            }
         }
     }
 }
