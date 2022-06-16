@@ -39,18 +39,6 @@ struct StartPageView: View {
             }
             .navigationTitle("Welcome to Swidget")
         }
-        // Handle opening App through link in widget
-        //        .onOpenURL { url in
-        //            guard
-        //                url.scheme == "swidget",
-        //                url.host == "movie",
-        //                let id = Int(url.pathComponents[1])
-        //                    
-        //            else {
-        //                print("Error openening App through widget URL.")
-        //                return
-        //            }
-        //        }
     }
 }
 

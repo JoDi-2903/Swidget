@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchMovieView: View {
+    @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var appData: AppDataModel
     @State var searchResultMovies: [Movie] = []
     @State private var searchText: String = ""
@@ -48,6 +49,12 @@ struct SearchMovieView: View {
             if appData.currentSearchTerm != nil {
                 searchMovies(for: appData.currentSearchTerm!)
                 appData.currentSearchTerm = nil
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                searchResultMovies.removeAll()
+                appData.currentTab = .start
             }
         }
     }

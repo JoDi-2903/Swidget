@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MovieDetailView: View {
     let movieId: Int
+    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var appData: AppDataModel
     @State var movie: Movie = .placeholder(1)
     @State var movieCast: [MovieCast] = []
     @State var movieCrew: [MovieCrew] = []
@@ -103,6 +106,12 @@ struct MovieDetailView: View {
                 (movieCast, movieCrew, movieVideo) = try await MovieDataService.shared.getCreditsAndTrailerForMovie(movieId: movieId)
             } catch {
                 print("Error loading the movie from API! \(error)")
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background {
+                presentationMode.wrappedValue.dismiss()
+                appData.currentTab = .start
             }
         }
     }
