@@ -10,21 +10,6 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-//    func category(for config: ConfigurationIntent) -> OverviewCategory {
-//        switch config.category {
-//        case .top_rated:
-//            return .top_rated
-//        case .popular:
-//            return .popular
-//        case .now_playing:
-//            return .now_playing
-//        case .upcoming:
-//            return .upcoming
-//        default:
-//            return .top_rated
-//        }
-//    }
-    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
     }
@@ -32,8 +17,10 @@ struct Provider: IntentTimelineProvider {
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         Task {
             do {
-                //let conf = category(for: configuration)
-                let movies = try await MovieDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
+                let selectedCategory: String = SelectedCategory(rawValue: configuration.category.rawValue)!.categoryValue
+                let selectedLanguage: String = SelectedLanguage(rawValue: configuration.language.rawValue)!.languageValue
+                
+                let movies = try await MovieDataService.shared.getMoviesFromCategory(category: selectedCategory, language: selectedLanguage)
                 let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
                 completion(entry)
             } catch {
@@ -46,7 +33,10 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
             do {
-                let movies = try await MovieDataService.shared.getMoviesFromCategory(category: "top_rated", language: nil)
+                let selectedCategory: String = SelectedCategory(rawValue: configuration.category.rawValue)!.categoryValue
+                let selectedLanguage: String = SelectedLanguage(rawValue: configuration.language.rawValue)!.languageValue
+                
+                let movies = try await MovieDataService.shared.getMoviesFromCategory(category: selectedCategory, language: selectedLanguage)
                 let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
                 let currentDate = Date()
                 let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!
@@ -63,25 +53,41 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-//public enum OverviewCategory: Int {
-//    case top_rated = 1
-//    case popular = 2
-//    case now_playing = 3
-//    case upcoming = 4
-//
-//    func description() -> String {
-//        switch self {
-//        case .top_rated:
-//            return "Top Rated"
-//        case .popular:
-//            return "Popular"
-//        case .now_playing:
-//            return "Now Playing"
-//        case .upcoming:
-//            return "Upcoming"
-//        }
-//    }
-//}
+enum SelectedCategory: Int {
+    case top_rated = 1
+    case popular = 2
+    case now_playing = 3
+    case upcoming = 4
+}
+extension SelectedCategory {
+    var categoryValue: String {
+        switch self {
+        case .top_rated:
+            return "top_rated"
+        case .popular:
+            return "popular"
+        case .now_playing:
+            return "now_playing"
+        case .upcoming:
+            return "upcoming"
+        }
+    }
+}
+
+enum SelectedLanguage: Int {
+    case en_US = 1
+    case de_DE = 2
+}
+extension SelectedLanguage {
+    var languageValue: String {
+        switch self {
+        case .en_US:
+            return "en_US"
+        case .de_DE:
+            return "de_DE"
+        }
+    }
+}
 
 struct SimpleEntry: TimelineEntry {
     let date: Date

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WidgetKit
 
 final class MovieDataService {
     static let shared = MovieDataService()

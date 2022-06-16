@@ -26,11 +26,6 @@
 		AB28DEC8281374C6001F3471 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB28DEC7281374C6001F3471 /* Preview Assets.xcassets */; };
 		AB3AA754285539800006EA4F /* MediumSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA753285539800006EA4F /* MediumSizeView.swift */; };
 		AB3AA756285539930006EA4F /* LargeSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA755285539930006EA4F /* LargeSizeView.swift */; };
-		AB3AA75D28563E160006EA4F /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB3AA75C28563E160006EA4F /* Intents.framework */; };
-		AB3AA76028563E160006EA4F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA75F28563E160006EA4F /* IntentHandler.swift */; };
-		AB3AA76428563E160006EA4F /* SwidgetIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AB3AA75B28563E160006EA4F /* SwidgetIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AB3AA76828563E4F0006EA4F /* CategoryWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AB98D4FF2853DC6000F95561 /* CategoryWidget.intentdefinition */; };
-		AB3AA769285641740006EA4F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA75F28563E160006EA4F /* IntentHandler.swift */; };
 		AB3AA76A285673120006EA4F /* CategoryWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = AB98D4FF2853DC6000F95561 /* CategoryWidget.intentdefinition */; };
 		AB3AA76C2857CAA20006EA4F /* SearchMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA76B2857CAA20006EA4F /* SearchMovieView.swift */; };
 		AB3AA76E2857D6220006EA4F /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3AA76D2857D6220006EA4F /* MovieDetailView.swift */; };
@@ -68,13 +63,6 @@
 			remoteGlobalIDString = AB04A49A285285BE00EC7C05;
 			remoteInfo = RewindWidgetExtension;
 		};
-		AB3AA76228563E160006EA4F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AB28DEB5281374C4001F3471 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AB3AA75A28563E160006EA4F;
-			remoteInfo = SwidgetIntents;
-		};
 		AB98D5052853DC6100F95561 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB28DEB5281374C4001F3471 /* Project object */;
@@ -98,7 +86,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AB3AA76428563E160006EA4F /* SwidgetIntents.appex in Embed App Extensions */,
 				ABC4AD44284BB39400B5942A /* RandomMovieWidgetExtension.appex in Embed App Extensions */,
 				AB98D5072853DC6100F95561 /* CategoryWidgetExtension.appex in Embed App Extensions */,
 				AB04A4A6285285BF00EC7C05 /* RewindWidgetExtension.appex in Embed App Extensions */,
@@ -124,10 +111,7 @@
 		AB28DEC7281374C6001F3471 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB3AA753285539800006EA4F /* MediumSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumSizeView.swift; sourceTree = "<group>"; };
 		AB3AA755285539930006EA4F /* LargeSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSizeView.swift; sourceTree = "<group>"; };
-		AB3AA75B28563E160006EA4F /* SwidgetIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SwidgetIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3AA75C28563E160006EA4F /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
-		AB3AA75F28563E160006EA4F /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		AB3AA76128563E160006EA4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3AA76B2857CAA20006EA4F /* SearchMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieView.swift; sourceTree = "<group>"; };
 		AB3AA76D2857D6220006EA4F /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		AB3AA7732858E55A0006EA4F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -166,14 +150,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB3AA75828563E160006EA4F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB3AA75D28563E160006EA4F /* Intents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +202,6 @@
 				ABC4AD3C284BB39300B5942A /* RandomMovieWidget */,
 				AB04A49E285285BE00EC7C05 /* RewindWidget */,
 				AB98D4FC2853DC6000F95561 /* CategoryWidget */,
-				AB3AA75E28563E160006EA4F /* SwidgetIntents */,
 				ABC4AD37284BB39300B5942A /* Frameworks */,
 				AB28DEBE281374C4001F3471 /* Products */,
 			);
@@ -239,7 +214,6 @@
 				ABC4AD36284BB39300B5942A /* RandomMovieWidgetExtension.appex */,
 				AB04A49B285285BE00EC7C05 /* RewindWidgetExtension.appex */,
 				AB98D4F92853DC6000F95561 /* CategoryWidgetExtension.appex */,
-				AB3AA75B28563E160006EA4F /* SwidgetIntents.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,15 +249,6 @@
 				AB3AA755285539930006EA4F /* LargeSizeView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		AB3AA75E28563E160006EA4F /* SwidgetIntents */ = {
-			isa = PBXGroup;
-			children = (
-				AB3AA75F28563E160006EA4F /* IntentHandler.swift */,
-				AB3AA76128563E160006EA4F /* Info.plist */,
-			);
-			path = SwidgetIntents;
 			sourceTree = "<group>";
 		};
 		AB3AA76F2858E43C0006EA4F /* Tools */ = {
@@ -408,29 +373,11 @@
 				ABC4AD43284BB39400B5942A /* PBXTargetDependency */,
 				AB04A4A5285285BF00EC7C05 /* PBXTargetDependency */,
 				AB98D5062853DC6100F95561 /* PBXTargetDependency */,
-				AB3AA76328563E160006EA4F /* PBXTargetDependency */,
 			);
 			name = Swidget;
 			productName = Swidget;
 			productReference = AB28DEBD281374C4001F3471 /* Swidget.app */;
 			productType = "com.apple.product-type.application";
-		};
-		AB3AA75A28563E160006EA4F /* SwidgetIntents */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AB3AA76528563E160006EA4F /* Build configuration list for PBXNativeTarget "SwidgetIntents" */;
-			buildPhases = (
-				AB3AA75728563E160006EA4F /* Sources */,
-				AB3AA75828563E160006EA4F /* Frameworks */,
-				AB3AA75928563E160006EA4F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwidgetIntents;
-			productName = SwidgetIntents;
-			productReference = AB3AA75B28563E160006EA4F /* SwidgetIntents.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 		AB98D4F82853DC6000F95561 /* CategoryWidgetExtension */ = {
 			isa = PBXNativeTarget;
@@ -482,9 +429,6 @@
 					AB28DEBC281374C4001F3471 = {
 						CreatedOnToolsVersion = 13.3;
 					};
-					AB3AA75A28563E160006EA4F = {
-						CreatedOnToolsVersion = 13.3.1;
-					};
 					AB98D4F82853DC6000F95561 = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -510,7 +454,6 @@
 				ABC4AD35284BB39300B5942A /* RandomMovieWidgetExtension */,
 				AB04A49A285285BE00EC7C05 /* RewindWidgetExtension */,
 				AB98D4F82853DC6000F95561 /* CategoryWidgetExtension */,
-				AB3AA75A28563E160006EA4F /* SwidgetIntents */,
 			);
 		};
 /* End PBXProject section */
@@ -530,13 +473,6 @@
 			files = (
 				AB28DEC8281374C6001F3471 /* Preview Assets.xcassets in Resources */,
 				AB28DEC5281374C6001F3471 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB3AA75928563E160006EA4F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,15 +528,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB3AA75728563E160006EA4F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB3AA76828563E4F0006EA4F /* CategoryWidget.intentdefinition in Sources */,
-				AB3AA76028563E160006EA4F /* IntentHandler.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AB98D4F52853DC6000F95561 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -609,7 +536,6 @@
 				AB98D50F2853DCA800F95561 /* Movie.swift in Sources */,
 				AB98D5032853DC6100F95561 /* CategoryWidget.intentdefinition in Sources */,
 				AB98D4FE2853DC6000F95561 /* CategoryWidget.swift in Sources */,
-				AB3AA769285641740006EA4F /* IntentHandler.swift in Sources */,
 				AB98D50D2853DCA800F95561 /* MovieDataService.swift in Sources */,
 				AB3AA754285539800006EA4F /* MediumSizeView.swift in Sources */,
 				AB98D5102853DCA800F95561 /* Utils.swift in Sources */,
@@ -636,11 +562,6 @@
 			isa = PBXTargetDependency;
 			target = AB04A49A285285BE00EC7C05 /* RewindWidgetExtension */;
 			targetProxy = AB04A4A4285285BF00EC7C05 /* PBXContainerItemProxy */;
-		};
-		AB3AA76328563E160006EA4F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AB3AA75A28563E160006EA4F /* SwidgetIntents */;
-			targetProxy = AB3AA76228563E160006EA4F /* PBXContainerItemProxy */;
 		};
 		AB98D5062853DC6100F95561 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -885,56 +806,6 @@
 			};
 			name = Release;
 		};
-		AB3AA76628563E160006EA4F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C23UW3NA42;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SwidgetIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SwidgetIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dhbw.Swidget.SwidgetIntents;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		AB3AA76728563E160006EA4F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C23UW3NA42;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SwidgetIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SwidgetIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dhbw.Swidget.SwidgetIntents;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		AB98D5082853DC6100F95561 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1069,15 +940,6 @@
 			buildConfigurations = (
 				AB28DECC281374C6001F3471 /* Debug */,
 				AB28DECD281374C6001F3471 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AB3AA76528563E160006EA4F /* Build configuration list for PBXNativeTarget "SwidgetIntents" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AB3AA76628563E160006EA4F /* Debug */,
-				AB3AA76728563E160006EA4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

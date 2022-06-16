@@ -133,7 +133,7 @@
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
 			<key>INIntentLastParameterTag</key>
-			<integer>7</integer>
+			<integer>10</integer>
 			<key>INIntentName</key>
 			<string>Configuration</string>
 			<key>INIntentParameters</key>
@@ -149,12 +149,17 @@
 					<string>79VaFY</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>1</integer>
+					<key>INIntentParameterEnumType</key>
+					<string>CategoriesEnum</string>
+					<key>INIntentParameterEnumTypeNamespace</key>
+					<string>88xZPY</string>
+					<key>INIntentParameterMetadata</key>
+					<dict>
+						<key>INIntentParameterMetadataDefaultValue</key>
+						<string>popular</string>
+					</dict>
 					<key>INIntentParameterName</key>
 					<string>category</string>
-					<key>INIntentParameterObjectType</key>
-					<string>CategoriesType</string>
-					<key>INIntentParameterObjectTypeNamespace</key>
-					<string>88xZPY</string>
 					<key>INIntentParameterPromptDialogs</key>
 					<array>
 						<dict>
@@ -190,14 +195,12 @@
 							<string>Confirmation</string>
 						</dict>
 					</array>
-					<key>INIntentParameterSupportsDynamicEnumeration</key>
-					<true/>
 					<key>INIntentParameterSupportsResolution</key>
 					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>7</integer>
+					<integer>10</integer>
 					<key>INIntentParameterType</key>
-					<string>Object</string>
+					<string>Integer</string>
 				</dict>
 				<dict>
 					<key>INIntentParameterConfigurable</key>
@@ -207,7 +210,7 @@
 					<key>INIntentParameterDisplayName</key>
 					<string>Language</string>
 					<key>INIntentParameterDisplayNameID</key>
-					<string>y2n7g2</string>
+					<string>nwm9Pf</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>2</integer>
 					<key>INIntentParameterEnumType</key>
@@ -241,7 +244,7 @@
 							<key>INIntentParameterPromptDialogFormatString</key>
 							<string>There are ${count} options matching ‘${language}’.</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>vrAP2u</string>
+							<string>SPfrXl</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>DisambiguationIntroduction</string>
 						</dict>
@@ -251,7 +254,7 @@
 							<key>INIntentParameterPromptDialogFormatString</key>
 							<string>Just to confirm, you wanted ‘${language}’?</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>3ppntg</string>
+							<string>wRNmU3</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Confirmation</string>
 						</dict>
@@ -259,7 +262,7 @@
 					<key>INIntentParameterSupportsResolution</key>
 					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>4</integer>
+					<integer>9</integer>
 					<key>INIntentParameterType</key>
 					<string>Integer</string>
 				</dict>
