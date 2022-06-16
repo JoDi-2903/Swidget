@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MoviesOverviewView: View {
-    
+    @EnvironmentObject var appData: AppDataModel
     @State var nowPlayingMovies: [Movie] = []
     @State var popularMovies: [Movie] = []
     @State var topRatedMovies: [Movie] = []

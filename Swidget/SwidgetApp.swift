@@ -9,13 +9,15 @@ import SwiftUI
 
 @main
 struct SwidgetApp: App {
+    @StateObject var appData: AppDataModel = AppDataModel()
+    
     init() {
         UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
     }
     
     var body: some Scene {
         WindowGroup {
-            TabView {
+            TabView(selection: $appData.currentTab) {
                 StartPageView()
                     .tabItem {
                         VStack {
@@ -23,7 +25,8 @@ struct SwidgetApp: App {
                             Text("Start")
                         }
                     }
-                    .tag(0)
+                    .environmentObject(appData)
+                    .tag(Tab.start)
                 
                 MoviesOverviewView()
                     .tabItem {
@@ -32,7 +35,8 @@ struct SwidgetApp: App {
                             Text("Movies")
                         }
                     }
-                    .tag(1)
+                    .environmentObject(appData)
+                    .tag(Tab.movie)
                 
                 SearchMovieView()
                     .tabItem {
@@ -41,13 +45,29 @@ struct SwidgetApp: App {
                             Text("Search")
                         }
                     }
-                    .tag(2)
+                    .environmentObject(appData)
+                    .tag(Tab.search)
             }
             .accentColor(.orange)
-            
+            .environmentObject(appData)
             // Handle opening App through link in widget
             .onOpenURL { url in
                 print("url: \(url)")
+                
+                guard
+                    url.scheme == "swidget",
+                    url.host == "movie",
+                    let id = Int(url.pathComponents[1])
+                else {
+                    print("Error openening App through widget URL.")
+                    return
+                }
+                
+                if appData.checkDeepLink(url: url, id: id) {
+                    print("Deep Link successful")
+                } else {
+                    print("Deep Link error")
+                }
             }
         }
     }

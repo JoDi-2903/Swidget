@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchMovieView: View {
+    @EnvironmentObject var appData: AppDataModel
     @State var searchResultMovies: [Movie] = []
     @State private var searchText: String = ""
     
@@ -17,7 +18,7 @@ struct SearchMovieView: View {
                 SearchBar(text: $searchText, onTextChanged: searchMovies)
                 
                 List(searchResultMovies) { movie in
-                    NavigationLink(destination: MovieDetailView(movieId: movie.id), label: {
+                    NavigationLink(tag: movie.id, selection: $appData.currentDetailPage) { MovieDetailView(movieId: movie.id) } label: {
                         VStack(alignment: .leading) {
                             Text(movie.title)
                             Text(movie.yearText)
@@ -25,10 +26,29 @@ struct SearchMovieView: View {
                                 .italic()
                                 .foregroundColor(.orange)
                         }
-                    })
+                    }
                 }
             }
             .navigationTitle("Search")
+        }
+        .onAppear(perform: {
+            if appData.currentSearchTerm != nil {
+                searchMovies(for: appData.currentSearchTerm!)
+                appData.currentSearchTerm = nil
+            }
+        })
+        .onDisappear(perform: {
+            if appData.currentSearchTerm != nil {
+                searchMovies(for: appData.currentSearchTerm!)
+                appData.currentSearchTerm = nil
+            }
+        })
+        .task {
+            // Search movie to allow opening DetailView via NavigationLink
+            if appData.currentSearchTerm != nil {
+                searchMovies(for: appData.currentSearchTerm!)
+                appData.currentSearchTerm = nil
+            }
         }
     }
     

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct StartPageView: View {
+    @EnvironmentObject var appData: AppDataModel
+    
     var body: some View {
         NavigationView {
             Form {
