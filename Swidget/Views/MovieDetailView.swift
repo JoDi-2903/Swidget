@@ -109,7 +109,7 @@ struct MovieDetailView: View {
             }
         }
         .onChange(of: scenePhase) { newPhase in
-            if newPhase == .background {
+            if newPhase == .background || newPhase == .inactive {
                 presentationMode.wrappedValue.dismiss()
                 appData.currentTab = .start
             }

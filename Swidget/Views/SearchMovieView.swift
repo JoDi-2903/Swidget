@@ -52,7 +52,7 @@ struct SearchMovieView: View {
             }
         }
         .onChange(of: scenePhase) { newPhase in
-            if newPhase == .background {
+            if newPhase == .background || newPhase == .inactive {
                 searchResultMovies.removeAll()
                 appData.currentTab = .start
             }

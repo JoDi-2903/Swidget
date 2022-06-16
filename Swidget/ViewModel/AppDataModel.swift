@@ -33,6 +33,7 @@ class AppDataModel: ObservableObject {
     
     func resolveMovieDetailLink(host: String, id: Int) -> Bool {
         print("ID from Link: \(id)")
+        
         if id != 0 {
             Task {
                 do {
@@ -42,6 +43,7 @@ class AppDataModel: ObservableObject {
                     print("Invalid movie id through link.")
                 }
             }
+            
             currentTab = .search
             currentDetailPage = id
             return true
