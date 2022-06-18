@@ -35,17 +35,29 @@ class AppDataModel: ObservableObject {
         print("ID from Link: \(id)")
         
         if id != 0 {
-            Task {
-                do {
-                    let linkMovie: Movie = try await MovieDataService.shared.getMovieFromId(id: id)
-                    currentSearchTerm = linkMovie.title
-                } catch {
-                    print("Invalid movie id through link.")
-                }
-            }
+            let group = DispatchGroup()
             
-            currentTab = .search
+            group.enter()
+            DispatchQueue.global(qos: .default).async {
+                Task {
+                    do {
+                        let linkMovie: Movie = try await MovieDataService.shared.getMovieFromId(id: id)
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            self?.currentSearchTerm = linkMovie.title
+                        }
+                    } catch {
+                        print("Invalid movie id through link.")
+                    }
+                }
+                
+                    group.leave()
+                }
+            group.wait()
+            
             currentDetailPage = id
+            currentTab = .search
+            
             return true
         } else {
             return false
