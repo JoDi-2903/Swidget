@@ -13,7 +13,7 @@ struct LargeSizeView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
-                Text("Category name")
+                Text(entry.categoryName.replacingOccurrences(of: "_", with: " ").capitalizingFirstLetter())
                     .font(.headline)
                     .bold()
                     .lineLimit(1)

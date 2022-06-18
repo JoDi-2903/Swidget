@@ -11,7 +11,7 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
+        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)], categoryName: "Placeholder Category")
     }
     
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
@@ -21,10 +21,10 @@ struct Provider: IntentTimelineProvider {
                 let selectedLanguage: String = SelectedLanguage(rawValue: configuration.language.rawValue)!.languageValue
                 
                 let movies = try await MovieDataService.shared.getMoviesFromCategory(category: selectedCategory, language: selectedLanguage)
-                let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies, categoryName: selectedCategory)
                 completion(entry)
             } catch {
-                let entry = SimpleEntry(date: .now, configuration: configuration, movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)], categoryName: "Popular")
                 completion(entry)
             }
         }
@@ -37,13 +37,13 @@ struct Provider: IntentTimelineProvider {
                 let selectedLanguage: String = SelectedLanguage(rawValue: configuration.language.rawValue)!.languageValue
                 
                 let movies = try await MovieDataService.shared.getMoviesFromCategory(category: selectedCategory, language: selectedLanguage)
-                let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies)
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: movies, categoryName: selectedCategory)
                 let currentDate = Date()
                 let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!
                 let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
                 completion(timeline)
             } catch {
-                let entry = SimpleEntry(date: .now, configuration: configuration, movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)])
+                let entry = SimpleEntry(date: .now, configuration: configuration, movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)], categoryName: "Popular")
                 let currentDate = Date()
                 let nextRefresh = Calendar.current.date(byAdding: .hour, value: +1, to: currentDate)!
                 let timeline = Timeline(entries: [entry], policy: .after(nextRefresh))
@@ -93,6 +93,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
     let movies: [Movie]
+    let categoryName: String
 }
 
 struct CategoryWidgetEntryView : View {
@@ -128,10 +129,10 @@ struct CategoryWidget: Widget {
 struct CategoryWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)]))
+            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)], categoryName: "Placeholder Category"))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             
-            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)]))
+            CategoryWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), movies: [.placeholder(1), .placeholder(2), .placeholder(3), .placeholder(4)], categoryName: "Placeholder Category"))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }
