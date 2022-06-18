@@ -21,7 +21,8 @@ struct StartPageView: View {
                         
                         Spacer(minLength: 5)
                         
-                        Text("Hello, Swidget! Some descriptive text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. At volutpat diam ut venenatis tellus in metus vulputate eu. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Libero nunc consequat interdum varius sit amet mattis. Lacus laoreet non curabitur gravida arcu ac tortor.")
+                        Text("The app 'Swidget' was developed to present the WidgetKit and its functionalities as an example. The aim of the project is not to create an AppStore-ready application, but to present the framework in a demo. As content for the widgets and general theme movies were chosen, which are provided by the open 'The Movie Database' (TMDB) API. This app contains four pages and seven widgets, divided into three widget groups.")
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     .padding(.all, 10)
                 }
@@ -35,6 +36,14 @@ struct StartPageView: View {
                     Text("2. Tap the Add button Grey add button in the top left-hand corner.")
                     Text("3. Select a widget, choose from the three different widget sizes, then tap Add Widget.")
                     Text("4. Tap Done.")
+                }
+                Section {
+                    Text("Legal notice")
+                        .font(.headline)
+                        .bold()
+                        .padding(.all, 5)
+                    Text("This product uses the TMDB API but is not endorsed or certified by TMDB.")
+                    Text("Copyright by Jonathan Diebel")
                 }
             }
             .navigationTitle("Welcome to Swidget")
