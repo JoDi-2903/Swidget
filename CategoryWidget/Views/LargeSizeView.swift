@@ -25,7 +25,7 @@ struct LargeSizeView: View {
             ForEach(0 ..< 4) { i in
                 let arrayElement: Int = i
                 
-                Link(destination: URL(string: "swidget://movie/\(entry.movies[arrayElement].id)")!) {
+                Link(destination: URL(string: "swidget://movie/\(entry.movies[arrayElement].id)/\(entry.movies[arrayElement].title.replacingOccurrences(of: " ", with: "%20"))")!) {
                     HStack(alignment: .top) {
                         Group {
                             if let url = URL(string: "https://image.tmdb.org/t/p/w500\(entry.movies[arrayElement].backdropPath ?? "/i3IOqOFdAdjw0ebQXkIevybkkNF.jpg")"), let imageData = try? Data(contentsOf: url),

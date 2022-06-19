@@ -23,6 +23,6 @@ struct SmallSizeView: View {
                 Image("placeholder-image")
             }
         }
-        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)"))
+        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)/\(entry.movie.title.replacingOccurrences(of: " ", with: "%20"))"))
     }
 }

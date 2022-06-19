@@ -54,17 +54,14 @@ struct SwidgetApp: App {
             .onOpenURL { url in
                 print("url: \(url)")
                 
-                guard
-                    url.scheme == "swidget",
-                    url.host == "movie",
-                    let id = Int(url.pathComponents[1])
-                else {
-                    print("Error openening App through widget URL.")
-                    return
-                }
+                let id = Int(url.pathComponents[1])
+                let title = String(url.pathComponents[2])
                 
-                if appData.checkDeepLink(url: url, id: id) {
-                    print("Deep Link successful")
+                print("ID from Link: \(id ?? 675353)")
+                print("Title from Link: \(title)")
+                
+                if appData.checkDeepLink(url: url, id: id!, title: title) {
+                    print("Deep Link valid")
                 } else {
                     print("Deep Link error")
                 }

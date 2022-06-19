@@ -26,7 +26,7 @@ struct MediumSizeView: View {
             }
         }
         .overlay(TextOverlayMediumView(entry: entry))
-        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)"))
+        .widgetURL(URL(string: "swidget://movie/\(entry.movie.id)/\(entry.movie.title.replacingOccurrences(of: " ", with: "%20"))"))
     }
 }
 
